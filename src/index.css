@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@theme {
+
+  --font-display: "League Spartan", sans-serif;
+  --text-xxs: 10px;
+  --text-xxxs: 9px;
+  --text-11px: 11px;
+  
+}
