@@ -40,16 +40,16 @@ function LoginForm() {
       });
 
       switch (role) {
-        case "student":
+        case "SUPER_ADMIN":
           navigate("/superadmin");
           break;
         case "instructor":
           navigate("/instructor");
           break;
-        case "orgadmin":
+        case "student":
           navigate("/student");
           break;
-        case "SUPER_ADMIN":
+        case "orgadmin":
           navigate("/orgadmin");
           break;
         default:

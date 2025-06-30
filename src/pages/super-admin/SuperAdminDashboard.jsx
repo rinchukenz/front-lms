@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -13,8 +13,30 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { getRecentActivities } from "../../services/AdminService";
 
 function SuperAdminDashboard() {
+  const [activities, setActivities] = useState([]);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const pageSize = 5;
+
+  useEffect(() => {
+    getActivities(0);
+  }, []);
+
+  const getActivities = async (pageNum = 0) => {
+    try {
+      const response = await getRecentActivities(pageNum, pageSize);
+      setActivities(response.data.content || []);
+      setTotalPages(response.data.totalPages);
+      setPage(pageNum);
+    } catch (error) {
+      console.error("Failed to fetch activities:", error);
+      setActivities([]);
+    }
+  };
+
   const stats = [
     { title: "Total Organizations", value: 12 },
     { title: "Total Courses", value: 128 },
@@ -45,13 +67,6 @@ function SuperAdminDashboard() {
     { month: "Jun", users: 610 },
   ];
 
-  const activities = [
-    "Admin John approved Org Alpha",
-    "User Alice enrolled in React",
-    "New course 'DevOps' added",
-    "System maintenance scheduled",
-  ];
-
   const issues = [
     { title: "Login bug", status: "Open", reportedBy: "Student A" },
     {
@@ -67,27 +82,25 @@ function SuperAdminDashboard() {
   ];
 
   const PIE_COLORS = [
-    "#3B82F6", // Blue
-    "#F59E0B", // Amber
-    "#10B981", // Green
-    "#EC4899", // Pink
-    "#6366F1", // Indigo
-    "#F43F5E", // Rose
+    "#3B82F6",
+    "#F59E0B",
+    "#10B981",
+    "#EC4899",
+    "#6366F1",
+    "#F43F5E",
   ];
 
-  const BAR_COLOR = "#60A5FA";
-
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12 space-y-12 bg-gray-300 min-h-screen">
+    <div className="max-w-7xl mx-auto px-6 py-12 space-y-12 bg-white min-h-screen">
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-2xl p-6 hover:shadow-md transition-all"
+            className="text-white p-5 rounded-xl shadow border border-[#999999]"
           >
             <div className="text-black text-sm">{stat.title}</div>
-            <div className="text-4xl font-bold text-blue-800 mt-2">
+            <div className="text-4xl font-bold text-black mt-2">
               {stat.value}
             </div>
           </div>
@@ -97,24 +110,54 @@ function SuperAdminDashboard() {
       {/* All Sections */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Recent Activities */}
-        <div className="bg-white rounded-2xl shadow-md p-6 border border-blue-100">
-          <h2 className="text-xl font-semibold text-black mb-4">
+        <div className="bg-white rounded-xl shadow p-4 border border-blue-100">
+          <h2 className="text-base font-semibold text-black mb-3">
             Recent Activities
           </h2>
-          <ul className="space-y-3 text-black">
-            {activities.map((activity, index) => (
-              <li
-                key={index}
-                className="flex items-start text-sm md:text-base hover:translate-x-1 transition-transform duration-200 ease-in-out"
-              >
-                <span className="text-lg text-blue-500">•</span>
-                <span className="ml-2">{activity}</span>
-              </li>
-            ))}
+          <ul className="space-y-1.5 text-black min-h-[150px]">
+            {activities.length === 0 ? (
+              <li className="text-xs text-gray-500">No recent activities</li>
+            ) : (
+              activities.map((activity, index) => (
+                <li
+                  key={index}
+                  className="flex items-start text-xs md:text-sm leading-tight"
+                >
+                  <span className="text-base text-violet-500 leading-tight">
+                    •
+                  </span>
+                  <span className="ml-2">
+                    {activity.action} –{" "}
+                    <span className="text-[10px] text-gray-500">
+                      {new Date(activity.timestamp).toLocaleString()}
+                    </span>
+                  </span>
+                </li>
+              ))
+            )}
           </ul>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center mt-3 space-x-1">
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => getActivities(i)}
+                  className={`px-2 py-0.5 text-xs rounded ${
+                    i === page
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Line Graph */}
+        {/* Line Chart */}
         <div className="bg-white rounded-2xl shadow-md p-6 border border-blue-100">
           <h2 className="text-xl font-semibold text-black mb-4">
             Monthly User Growth
@@ -128,15 +171,15 @@ function SuperAdminDashboard() {
               <Line
                 type="monotone"
                 dataKey="users"
-                stroke="#22C55E" // Green line
+                stroke="#9D5CFF"
                 strokeWidth={3}
-                dot={{ r: 5, fill: "#4ADE80" }} // Light green dots
+                dot={{ r: 5, fill: "#9D5CFF" }}
               />
             </LineChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Bar Graph */}
+        {/* Bar Chart */}
         <div className="bg-white rounded-2xl shadow-md p-6 border border-blue-100">
           <h2 className="text-xl font-semibold text-black mb-4">
             Course Enrollments
@@ -147,11 +190,7 @@ function SuperAdminDashboard() {
               <YAxis stroke="#4B5563" />
               <Tooltip />
               <Legend />
-              <Bar
-                dataKey="students"
-                fill="#22C55E" // Green bar fill
-                radius={[6, 6, 0, 0]}
-              />
+              <Bar dataKey="students" fill="#9D5CFF" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

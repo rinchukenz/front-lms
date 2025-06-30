@@ -31,12 +31,12 @@ function SuperAdminSidebar() {
   const activeOption = getActiveOption();
 
   return (
-    <div className="h-full w-full flex flex-col items-center py-6 gap-12 bg-gradient-to-b from-black via-zinc-800 to-zinc-900 shadow-xl text-white">
+    <div className="h-full w-full flex flex-col items-center py-6 gap-8 bg-[#F9F9F9] border-r border-[#B8B8B8] overflow-y-auto">
       {/* Header */}
       <div className="flex items-center gap-3">
         <div>
           <h3 className="font-bold text-lg">Super Admin</h3>
-          <p className="text-xs text-gray-400">LMS Control Panel</p>
+          <p className="text-xs text-gray-800">LMS Control Panel</p>
         </div>
       </div>
 

@@ -92,4 +92,12 @@ export const deleteOrg = (orgId) => {
     },
   });
 }
- 
+
+export const getRecentActivities = (page = 0, size = 20) => {
+  return axios.get(`${REST_API_BASE_URL}/api/activity-logs/recent`, {
+    params: { page, size },
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
