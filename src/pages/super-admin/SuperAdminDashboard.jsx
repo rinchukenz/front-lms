@@ -13,16 +13,20 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { getRecentActivities } from "../../services/AdminService";
+import { getRecentActivities, getTotalOrganizations, pendingCount } from "../../services/AdminService";
 
 function SuperAdminDashboard() {
   const [activities, setActivities] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [orgCount, setOrgCount] = useState([]);
+  const [pendingRequestsCount, setPendingRequestsCount] = useState([]);
   const pageSize = 5;
 
   useEffect(() => {
     getActivities(0);
+    OrganizationCount();
+    getPendingRequests();
   }, []);
 
   const getActivities = async (pageNum = 0) => {
@@ -37,10 +41,57 @@ function SuperAdminDashboard() {
     }
   };
 
+  const OrganizationCount = async () => {
+    try {
+      const response = await getTotalOrganizations();
+      setOrgCount(response.data);
+      console.log(orgCount);
+    } catch (error) {
+      console.error("Failed to fetch organization count:", error);
+      setOrgCount(0);
+    }
+  }
+
+
+  const getPendingRequests = async () => {
+    try{
+      const response = await pendingCount();
+      setPendingRequestsCount(response.data);
+    } catch (error) {
+      console.error("Failed to fetch pending requests count:", error);
+      setPendingRequestsCount([]);
+    }
+  }
+
+  
+  // Helper: Get visible page numbers (max 8)
+  const getVisiblePages = (totalPages, currentPage, maxVisible = 8) => {
+    let start = 0;
+    let end = totalPages;
+
+    if (totalPages <= maxVisible) {
+      start = 0;
+      end = totalPages;
+    } else {
+      if (currentPage <= Math.floor(maxVisible / 2)) {
+        start = 0;
+        end = maxVisible;
+      } else if (currentPage >= totalPages - Math.ceil(maxVisible / 2)) {
+        start = totalPages - maxVisible;
+        end = totalPages;
+      } else {
+        start = currentPage - Math.floor(maxVisible / 2);
+        end = start + maxVisible;
+      }
+    }
+
+    return Array.from({ length: end - start }, (_, i) => i + start);
+  };
+
   const stats = [
-    { title: "Total Organizations", value: 12 },
-    { title: "Total Courses", value: 128 },
-    { title: "Pending Requests", value: 6 },
+    { title: "Total Organizations", value: orgCount.totalOrganizations, className: "bg-gradient-to-b from-[#7022A3] to-[#9D5CFF] text-white" },
+    { title: "Total Courses", value: 56 },
+    { title: "Pending Requests", value: pendingRequestsCount.pendingOrgAdminRequests },
     { title: "Registered Users", value: 945 },
   ];
 
@@ -97,12 +148,10 @@ function SuperAdminDashboard() {
         {stats.map((stat, idx) => (
           <div
             key={idx}
-            className="text-white p-5 rounded-xl shadow border border-[#999999]"
+            className={`${stat.className} text-white p-5 rounded-xl shadow border border-[#999999]`}
           >
-            <div className="text-black text-sm">{stat.title}</div>
-            <div className="text-4xl font-bold text-black mt-2">
-              {stat.value}
-            </div>
+            <div className={`text-sm ${stat.className ? "text-white" : "text-black"}`}>{stat.title}</div>
+            <div className={`text-4xl ${stat.className ? "text-white" : "text-black"} font-bold mt-2`}>{stat.value}</div>
           </div>
         ))}
       </div>
@@ -110,11 +159,11 @@ function SuperAdminDashboard() {
       {/* All Sections */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Recent Activities */}
-        <div className="bg-white rounded-xl shadow p-4 border border-blue-100">
+        <div className="bg-white rounded-xl shadow p-4 border border-blue-100 flex flex-col">
           <h2 className="text-base font-semibold text-black mb-3">
             Recent Activities
           </h2>
-          <ul className="space-y-1.5 text-black min-h-[150px]">
+          <ul className="space-y-1.5 text-black min-h-[150px] flex-grow">
             {activities.length === 0 ? (
               <li className="text-xs text-gray-500">No recent activities</li>
             ) : (
@@ -123,9 +172,7 @@ function SuperAdminDashboard() {
                   key={index}
                   className="flex items-start text-xs md:text-sm leading-tight"
                 >
-                  <span className="text-base text-violet-500 leading-tight">
-                    •
-                  </span>
+                  <span className="text-base text-violet-500 leading-tight">•</span>
                   <span className="ml-2">
                     {activity.action} –{" "}
                     <span className="text-[10px] text-gray-500">
@@ -139,20 +186,56 @@ function SuperAdminDashboard() {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex justify-center mt-3 space-x-1">
-              {Array.from({ length: totalPages }, (_, i) => (
+            <div
+              className="mt-3 max-w-[75%] mx-auto py-1 px-2 flex items-center space-x-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+              style={{
+                scrollPaddingLeft: "10px",
+                scrollSnapType: "x mandatory",
+              }}
+            >
+              <button
+                onClick={() => getActivities(Math.max(page - 1, 0))}
+                disabled={page === 0}
+                className={`flex-shrink-0 px-3 py-1 rounded text-xs cursor-pointer whitespace-nowrap ${
+                  page === 0
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
+                aria-label="Previous page"
+                style={{ scrollSnapAlign: "start" }}
+              >
+                «
+              </button>
+
+              {getVisiblePages(totalPages, page, 8).map((i) => (
                 <button
                   key={i}
                   onClick={() => getActivities(i)}
-                  className={`px-2 py-0.5 text-xs rounded ${
+                  className={`flex-shrink-0 px-2 py-0.5 text-xs cursor-pointer rounded whitespace-nowrap ${
                     i === page
-                      ? "bg-blue-600 text-white"
+                      ? "bg-violet-600 text-white"
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                   }`}
+                  aria-current={i === page ? "page" : undefined}
+                  style={{ scrollSnapAlign: "start" }}
                 >
                   {i + 1}
                 </button>
               ))}
+
+              <button
+                onClick={() => getActivities(Math.min(page + 1, totalPages - 1))}
+                disabled={page === totalPages - 1}
+                className={`flex-shrink-0 px-3 py-1 cursor-pointer rounded text-xs whitespace-nowrap ${
+                  page === totalPages - 1
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
+                aria-label="Next page"
+                style={{ scrollSnapAlign: "start" }}
+              >
+                »
+              </button>
             </div>
           )}
         </div>
@@ -186,7 +269,7 @@ function SuperAdminDashboard() {
           </h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={courseData}>
-              <XAxis dataKey="name" stroke="#4B5563" />
+              <XAxis className="text-sm" dataKey="name" stroke="#4B5563" />
               <YAxis stroke="#4B5563" />
               <Tooltip />
               <Legend />
@@ -195,7 +278,7 @@ function SuperAdminDashboard() {
           </ResponsiveContainer>
         </div>
 
-        {/* Pie Chart */}
+        {/* Pie Chart
         <div className="bg-white rounded-2xl shadow-md p-6 border border-blue-100">
           <h2 className="text-xl font-semibold text-black mb-4">
             Course Categories
@@ -221,7 +304,7 @@ function SuperAdminDashboard() {
               <Legend />
             </PieChart>
           </ResponsiveContainer>
-        </div>
+        </div> */}
 
         {/* Reported Issues */}
         <div className="bg-white rounded-2xl shadow-md p-6 border border-blue-100">
@@ -236,9 +319,7 @@ function SuperAdminDashboard() {
               >
                 <div>
                   <div className="font-medium text-black">{issue.title}</div>
-                  <div className="text-xs text-gray-600">
-                    By: {issue.reportedBy}
-                  </div>
+                  <div className="text-xs text-gray-600">By: {issue.reportedBy}</div>
                 </div>
                 <span
                   className={`text-xs px-2 py-1 rounded-full font-semibold ${

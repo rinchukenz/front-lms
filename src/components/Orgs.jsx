@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { activateOrg, deleteOrg, getAllOrgs, suspendOrg } from "../services/AdminService";
+import {
+  activateOrg,
+  deleteOrg,
+  getAllOrgs,
+  suspendOrg,
+} from "../services/AdminService";
 import { Link } from "react-router-dom";
 
 function Orgs() {
@@ -39,7 +44,7 @@ function Orgs() {
   };
 
   const handleDelete = async (orgId) => {
-    try{
+    try {
       await deleteOrg(orgId);
       getOrganizations();
     } catch (error) {
@@ -69,7 +74,7 @@ function Orgs() {
           placeholder="Search by name or domain..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full sm:w-96 px-4 py-2 border-2 border-black rounded-lg shadow-sm focus:outline-none focus:ring-black"
+          className="w-full sm:w-96 px-4 py-2 border bg-white border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-400"
         />
       </div>
 
@@ -83,9 +88,17 @@ function Orgs() {
               className="bg-white rounded-xl shadow-md p-5 flex flex-col justify-between border border-blue-100 hover:shadow-lg transition"
             >
               <div>
-                <h2 className="text-xl font-semibold text-blue-700 mb-2">
-                  {org.name}
-                </h2>
+                <div className="flex justify-between mb-3">
+                  <h2 className="text-xl font-bold text-black mb-2">
+                    {org.name.slice(0, 16)}
+                    {org.name.length > 16 ? "..." : ""}
+                  </h2>
+                  <Link to={`/superadmin/organizations/addadmin/${org.id}`}>
+                    <button className="bg-[#9D5CFF] hover:bg-violet-600 cursor-pointer text-white px-3 py-1 rounded text-sm">
+                      Add Admin
+                    </button>
+                  </Link>
+                </div>
                 <p className="text-sm text-gray-600 mb-1">
                   <strong>Domain:</strong> {org.domain}
                 </p>
@@ -122,32 +135,22 @@ function Orgs() {
               <div className="mt-4 flex flex-wrap gap-2">
                 <button
                   onClick={() => handleActivate(org.id)}
-                  className="bg-green-500 hover:bg-green-600 cursor-pointer text-white px-3 py-1 rounded text-sm"
+                  className="cursor-pointer text-green-400 font-semibold border border-gray-500 px-3 py-1 rounded text-sm"
                 >
                   Activate
                 </button>
                 <button
                   onClick={() => handleDeactivate(org.id)}
-                  className="bg-yellow-500 hover:bg-yellow-600 cursor-pointer text-white px-3 py-1 rounded text-sm"
+                  className="cursor-pointer text-yellow-500 font-semibold border border-gray-500 px-3 py-1 rounded text-sm"
                 >
                   Deactivate
                 </button>
                 <button
                   onClick={() => handleDelete(org.id)}
-                  className="bg-red-500 hover:bg-red-600 cursor-pointer text-white px-3 py-1 rounded text-sm"
+                  className="cursor-pointer text-red-500 font-semibold border border-gray-500 px-3 py-1 rounded text-sm"
                 >
                   Delete
                 </button>
-                <Link to={`/superadmin/organizations/addadmin/${org.id}`}>
-                  <button className="bg-blue-500 hover:bg-blue-600 cursor-pointer text-white px-3 py-1 rounded text-sm">
-                    Add Admin
-                  </button>
-                </Link>
-                <Link to={`/superadmin/organizations/addadmin-bulk/${org.id}`}>
-                  <button className="bg-blue-500 hover:bg-blue-600 cursor-pointer text-white px-3 py-1 rounded text-sm">
-                    Admin Bulk
-                  </button>
-                </Link>
               </div>
             </div>
           ))}

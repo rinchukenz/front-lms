@@ -80,7 +80,7 @@ function SuperAdminSidebar() {
       </div>
 
       {/* Logout */}
-      <div className="mt-auto pt-6 border-t w-4/5 border-gray-700">
+      <div className="mt-auto pt-6">
         <LogOutButton />
       </div>
     </div>

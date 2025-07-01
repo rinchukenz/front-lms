@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import SideOption from "../../components/SideOption/SideOption";
 import skyllx from "../../assets/skyllx.png";
-
+import LogOutButton from "../../components/LogOutButton";
 import {
   MdDashboard,
   MdGroups,
@@ -17,6 +17,7 @@ import {
   MdSettings,
   MdLogout,
 } from "react-icons/md";
+
 
 function OrgAdminSidebar() {
   const location = useLocation();
@@ -125,14 +126,10 @@ function OrgAdminSidebar() {
           />
         </Link>
 
-        <Link to="/login">
-          <div className="px-8 mt-6">
-            <button className="w-full flex items-center font-bold text-sm justify-center gap-1 text-red-500 hover:text-red-600 py-0.5 rounded-lg cursor-pointer">
-              <MdLogout className="text-lg" />
-              Sign out
-            </button>
-          </div>
-        </Link>
+        {/* Logout */}
+        <div className="mt-auto pt-6 border-t w-4/5 border-gray-700">
+          <LogOutButton />
+        </div>
       </div>
     </div>
   );

@@ -101,3 +101,28 @@ export const getRecentActivities = (page = 0, size = 20) => {
     },
   });
 };
+
+export const getTotalOrganizations = () => {
+  return axios.get(`${REST_API_BASE_URL}/api/organizations/count`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+}
+
+export const pendingRequests = () => {
+  return axios.get(`${REST_API_BASE_URL}/api/admins/pending`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+}
+
+
+export const pendingCount = () => {
+  return axios.get(`${REST_API_BASE_URL}/api/admins/pending/count`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+}

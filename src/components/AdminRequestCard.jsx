@@ -73,19 +73,19 @@ function AdminRequestCard({ id, name, email, organization, phone, approved, onAc
       <div className="mt-4 flex flex-wrap gap-2">
         <button
           onClick={handleApprove}
-          className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm"
+          className="text-green-500 border border-gray-500 font-semibold cursor-pointer px-3 py-1 rounded text-sm"
         >
           Approve
         </button>
         <button
           onClick={handleReject}
-          className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm"
+          className="border border-gray-500 text-yellow-500 font-semibold cursor-pointer px-3 py-1 rounded text-sm"
         >
           Reject
         </button>
         <button
           onClick={handleDelete}
-          className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
+          className="border border-gray-500 text-red-600 font-semibold cursor-pointer px-3 py-1 rounded text-sm"
         >
           Delete
         </button>
