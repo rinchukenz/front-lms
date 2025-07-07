@@ -41,7 +41,7 @@ function LoginForm() {
 
       switch (role) {
         case "SUPER_ADMIN":
-          navigate("/superadmin");
+          navigate("/orgadmin");
           break;
         case "instructor":
           navigate("/instructor");

@@ -13,9 +13,21 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { getRecentActivities, getTotalOrganizations, pendingCount } from "../../services/AdminService";
+import {
+  getRecentActivities,
+  getTotalOrganizations,
+  pendingCount,
+} from "../../services/AdminService";
+import { useNavigate } from "react-router-dom";
 
 function SuperAdminDashboard() {
+
+  const navigate = useNavigate();
+
+  function goToRequests() {
+    navigate("/superadmin/org-admins");
+  }
+
   const [activities, setActivities] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -50,20 +62,18 @@ function SuperAdminDashboard() {
       console.error("Failed to fetch organization count:", error);
       setOrgCount(0);
     }
-  }
-
+  };
 
   const getPendingRequests = async () => {
-    try{
+    try {
       const response = await pendingCount();
       setPendingRequestsCount(response.data);
     } catch (error) {
       console.error("Failed to fetch pending requests count:", error);
       setPendingRequestsCount([]);
     }
-  }
+  };
 
-  
   // Helper: Get visible page numbers (max 8)
   const getVisiblePages = (totalPages, currentPage, maxVisible = 8) => {
     let start = 0;
@@ -88,12 +98,19 @@ function SuperAdminDashboard() {
     return Array.from({ length: end - start }, (_, i) => i + start);
   };
 
-  const stats = [
-    { title: "Total Organizations", value: orgCount.totalOrganizations, className: "bg-gradient-to-b from-[#7022A3] to-[#9D5CFF] text-white" },
-    { title: "Total Courses", value: 56 },
-    { title: "Pending Requests", value: pendingRequestsCount.pendingOrgAdminRequests },
-    { title: "Registered Users", value: 945 },
-  ];
+  // const stats = [
+  //   {
+  //     title: "Total Organizations",
+  //     value: orgCount.totalOrganizations,
+  //     className: "bg-gradient-to-b from-[#7022A3] to-[#9D5CFF] text-white",
+  //   },
+  //   { title: "Total Courses", value: 56 },
+  //   {
+  //     title: "Pending Requests",
+  //     value: pendingRequestsCount.pendingOrgAdminRequests,
+  //   },
+  //   { title: "Registered Users", value: 945 },
+  // ];
 
   const courseData = [
     { name: "Java", students: 300 },
@@ -145,7 +162,7 @@ function SuperAdminDashboard() {
     <div className="max-w-7xl mx-auto px-6 py-12 space-y-12 bg-white min-h-screen">
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, idx) => (
+        {/* {stats.map((stat, idx) => (
           <div
             key={idx}
             className={`${stat.className} text-white p-5 rounded-xl shadow border border-[#999999]`}
@@ -153,7 +170,43 @@ function SuperAdminDashboard() {
             <div className={`text-sm ${stat.className ? "text-white" : "text-black"}`}>{stat.title}</div>
             <div className={`text-4xl ${stat.className ? "text-white" : "text-black"} font-bold mt-2`}>{stat.value}</div>
           </div>
-        ))}
+        ))} */}
+
+        {/* Published products */}
+        <div className="bg-[#9D5CFF] text-white p-5 rounded-xl shadow border border-[#999999]">
+          <p className="mb-1">Total Organizations</p>
+          <p className="text-2xl font-semibold">
+            {orgCount.totalOrganizations}
+          </p>
+        </div>
+
+        {/* Published products */}
+        <div className="bg-white p-5 rounded-xl shadow border border-[#999999]">
+          <p className="mb-1">Total Courses</p>
+          <p className="text-2xl font-semibold">56</p>
+        </div>
+
+        {/* Registered accounts */}
+        <div className="bg-white p-5 rounded-xl shadow border border-[#999999]">
+          <p className="text-gray-600 mb-1">Pending Requests</p>
+          <p className="text-2xl font-semibold">
+            {pendingRequestsCount.pendingOrgAdminRequests}
+          </p>
+          <div className="flex justify-end">
+            <span
+              onClick={goToRequests}
+              className="text-violet-600 text-sm cursor-pointer hover:underline"
+            >
+              • view all pending requests
+            </span>
+          </div>
+        </div>
+
+        {/* Revenue */}
+        <div className="bg-white p-5 rounded-xl shadow border border-[#999999]">
+          <p className="text-gray-600 mb-1">Registered Users</p>
+          <p className="text-2xl font-semibold">783</p>
+        </div>
       </div>
 
       {/* All Sections */}
@@ -172,7 +225,9 @@ function SuperAdminDashboard() {
                   key={index}
                   className="flex items-start text-xs md:text-sm leading-tight"
                 >
-                  <span className="text-base text-violet-500 leading-tight">•</span>
+                  <span className="text-base text-violet-500 leading-tight">
+                    •
+                  </span>
                   <span className="ml-2">
                     {activity.action} –{" "}
                     <span className="text-[10px] text-gray-500">
@@ -224,7 +279,9 @@ function SuperAdminDashboard() {
               ))}
 
               <button
-                onClick={() => getActivities(Math.min(page + 1, totalPages - 1))}
+                onClick={() =>
+                  getActivities(Math.min(page + 1, totalPages - 1))
+                }
                 disabled={page === totalPages - 1}
                 className={`flex-shrink-0 px-3 py-1 cursor-pointer rounded text-xs whitespace-nowrap ${
                   page === totalPages - 1
@@ -319,7 +376,9 @@ function SuperAdminDashboard() {
               >
                 <div>
                   <div className="font-medium text-black">{issue.title}</div>
-                  <div className="text-xs text-gray-600">By: {issue.reportedBy}</div>
+                  <div className="text-xs text-gray-600">
+                    By: {issue.reportedBy}
+                  </div>
                 </div>
                 <span
                   className={`text-xs px-2 py-1 rounded-full font-semibold ${

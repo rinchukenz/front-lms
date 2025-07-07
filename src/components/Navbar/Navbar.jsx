@@ -27,7 +27,7 @@ function Navbar() {
     if (location.pathname.includes("admin-management")) return "Admin Management";
     if (location.pathname.includes("org-admins")) return "Organization Admins";
     if (location.pathname.includes("organizations")) return "Organizations";
-    if (location.pathname.includes("/instructors")) return "Instructors";
+    if (location.pathname.includes("/leaderboard")) return "Leaderboard";
     if (location.pathname.includes("transactions")) return "Transactions";
     if (location.pathname.includes("courses")) return "Courses";
     if (location.pathname.includes("support")) return "Support";

@@ -29,7 +29,7 @@ function AdminRequests() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-gray-50">
+    <div className="max-w-7xl mx-auto p-6">
 
       <div className="my-6">
         <input

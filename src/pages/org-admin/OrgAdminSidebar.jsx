@@ -18,12 +18,11 @@ import {
   MdLogout,
 } from "react-icons/md";
 
-
 function OrgAdminSidebar() {
   const location = useLocation();
 
   const getActiveOption = () => {
-    if (location.pathname.includes("/instructors")) return "Instructors";
+    if (location.pathname.includes("/leaderboard")) return "Leaderboard";
     if (location.pathname === "/orgadmin") return "Dashboard";
     if (location.pathname.includes("/assessments")) return "Assessments";
     if (location.pathname.includes("/students")) return "Students";
@@ -62,11 +61,19 @@ function OrgAdminSidebar() {
           />
         </Link>
 
-        <Link to="/orgadmin/instructors">
+        <Link to="/orgadmin/courses">
           <SideOption
-            text="Instructors"
+            text="Courses"
+            Icon={MdLibraryBooks}
+            isActive={activeOption === "Courses"}
+          />
+        </Link>
+
+        <Link to="/orgadmin/leaderboard">
+          <SideOption
+            text="Leaderboard"
             Icon={MdGroups}
-            isActive={activeOption === "Instructors"}
+            isActive={activeOption === "Leaderboard"}
           />
         </Link>
 
@@ -91,14 +98,6 @@ function OrgAdminSidebar() {
             text="Transactions"
             Icon={MdPayments}
             isActive={activeOption === "Transactions"}
-          />
-        </Link>
-
-        <Link to="/orgadmin/courses">
-          <SideOption
-            text="Courses"
-            Icon={MdLibraryBooks}
-            isActive={activeOption === "Courses"}
           />
         </Link>
 

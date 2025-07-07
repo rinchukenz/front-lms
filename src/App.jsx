@@ -27,6 +27,8 @@ import { ToastContainer } from "react-toastify";
 import AdminBulkRegistration from "./components/AdminBulkRegistration";
 import Students from "./components/Students";
 import StudentData from "./components/StudentData";
+import Leaderboard from "./components/Leaderboard";
+import CourseData from "./components/CourseData";
 
 function App() {
   return (
@@ -71,9 +73,10 @@ function App() {
             <Route index element={<OrgAdminDashboard />} />
             <Route path="students" element={<Students />} />
             <Route path="students/:sId" element={<StudentData />} />
-            <Route path="instructors" element={<ComingSoon />} />
+            <Route path="leaderboard" element={<Leaderboard />} />
             <Route path="transactions" element={<ComingSoon />} />
             <Route path="courses" element={<Courses />} />
+            <Route path="courses/:cId" element={<CourseData />} />
             <Route path="assessments" element={<ComingSoon />} />
             <Route path="live-class" element={<ComingSoon />} />
             <Route path="certificates" element={<ComingSoon />} />
