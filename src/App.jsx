@@ -29,6 +29,7 @@ import Students from "./components/Students";
 import StudentData from "./components/StudentData";
 import Leaderboard from "./components/Leaderboard";
 import CourseData from "./components/CourseData";
+import AddContent from "./components/AddContent";
 
 function App() {
   return (
@@ -77,6 +78,7 @@ function App() {
             <Route path="transactions" element={<ComingSoon />} />
             <Route path="courses" element={<Courses />} />
             <Route path="courses/:cId" element={<CourseData />} />
+            <Route path="courses/:cId/add-content" element={<AddContent />} />
             <Route path="assessments" element={<ComingSoon />} />
             <Route path="live-class" element={<ComingSoon />} />
             <Route path="certificates" element={<ComingSoon />} />

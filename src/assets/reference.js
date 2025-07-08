@@ -94,3 +94,15 @@ public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 
 
 superadmin@skyllx.com
+
+
+
+
+<div className="flex gap-4 mb-6 text-white">
+        <button className="border px-2 py-1 bg-violet-500 rounded-md">
+          New Recorded course
+        </button>
+        <button className="border px-2 py-1 bg-violet-500 rounded-md">
+          New Cohort-Based Course (CBC)
+        </button>
+      </div>
