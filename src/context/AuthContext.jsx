@@ -10,8 +10,12 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
     isLoggedIn: false,
     user: null,
+    adminId: null, 
     role: null,
     token: null,
+    name: null,
+    organizationId: null,
+    organizationName: null,
   });
 
   const [loading, setLoading] = useState(true); // 🆕 loading state
@@ -22,14 +26,18 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        const { exp, sub: user, role } = decoded;
+        const { exp, sub: user, id: adminId, role, name, organizationId, organizationName } = decoded;
 
         if (Date.now() < exp * 1000) {
           setAuth({
             isLoggedIn: true,
             user,
+            adminId,
             role,
             token,
+            name,
+            organizationId,
+            organizationName,
           });
 
           const remainingTime = exp * 1000 - Date.now();
@@ -53,8 +61,12 @@ export const AuthProvider = ({ children }) => {
     setAuth({
       isLoggedIn: false,
       user: null,
+      adminId: null,
       role: null,
       token: null,
+      name: null,
+      organizationId: null,
+      organizationName: null,
     });
     navigate("/");
   };

@@ -25,23 +25,28 @@ function LoginForm() {
 
       const { token } = res.data;
       const decoded = jwtDecode(token);
-      const { role, sub: user } = decoded;
+      const { role, sub: user, id: adminId, name, organizationId, organizationName } = decoded;
 
-      console.log(token);
+      //console.log(token);
       console.log(decoded);
+      //console.log(role, user, name, organizationId, organizationName);
 
       localStorage.setItem("token", token); // ✅ store token
 
       setAuth({
         isLoggedIn: true,
         user,
+        adminId,
         role,
         token,
+        name,
+        organizationId,
+        organizationName,
       });
 
       switch (role) {
         case "SUPER_ADMIN":
-          navigate("/orgadmin");
+          navigate("/superadmin");
           break;
         case "instructor":
           navigate("/instructor");
@@ -49,7 +54,7 @@ function LoginForm() {
         case "student":
           navigate("/student");
           break;
-        case "orgadmin":
+        case "ORG_ADMIN":
           navigate("/orgadmin");
           break;
         default:

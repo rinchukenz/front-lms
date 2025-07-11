@@ -30,6 +30,8 @@ import StudentData from "./components/StudentData";
 import Leaderboard from "./components/Leaderboard";
 import CourseData from "./components/CourseData";
 import AddContent from "./components/AddContent";
+import AddCourse from "./components/AddCourse";
+import CoursePage from "./components/CoursePage";
 
 function App() {
   return (
@@ -69,7 +71,7 @@ function App() {
         
 
         {/* Org Admin Routes */}
-        <Route element={<ProtectedRoute allowedRoles={["SUPER_ADMIN"]} />}>
+        <Route element={<ProtectedRoute allowedRoles={["ORG_ADMIN"]} />}>
           <Route path="/orgadmin" element={<OrgAdminHome />}>
             <Route index element={<OrgAdminDashboard />} />
             <Route path="students" element={<Students />} />
@@ -77,7 +79,9 @@ function App() {
             <Route path="leaderboard" element={<Leaderboard />} />
             <Route path="transactions" element={<ComingSoon />} />
             <Route path="courses" element={<Courses />} />
-            <Route path="courses/:cId" element={<CourseData />} />
+            <Route path="courses/addcourse" element={<AddCourse />} />
+            <Route path="courses/:cId" element={<CoursePage />} />
+            <Route path="update-course/:cId" element={<AddCourse />} />
             <Route path="courses/:cId/add-content" element={<AddContent />} />
             <Route path="assessments" element={<ComingSoon />} />
             <Route path="live-class" element={<ComingSoon />} />

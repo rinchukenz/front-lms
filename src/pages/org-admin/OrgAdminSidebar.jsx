@@ -17,9 +17,16 @@ import {
   MdSettings,
   MdLogout,
 } from "react-icons/md";
+import { useAuth } from "../../context/AuthContext";
 
 function OrgAdminSidebar() {
   const location = useLocation();
+
+  const { auth } = useAuth();
+
+  console.log(auth);
+  console.log(auth.role);
+  console.log(auth.user);
 
   const getActiveOption = () => {
     if (location.pathname.includes("/leaderboard")) return "Leaderboard";
@@ -41,7 +48,8 @@ function OrgAdminSidebar() {
   return (
     <div className="h-full w-full flex flex-col items-center py-6 gap-8 bg-[#F9F9F9] border-r border-[#B8B8B8] overflow-y-auto">
       <div className="flex flex-col items-center justify-center gap-2">
-        <h3 className="font-bold text-xl text-black">JAIN University</h3>
+        <h3 className="font-bold text-xl text-black">{auth.organizationName}</h3>
+        <h4>{auth.name}</h4>
       </div>
 
       <div className="options w-full px-2">
