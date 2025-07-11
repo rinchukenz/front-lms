@@ -243,23 +243,22 @@ function CoursePage() {
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
       {/* Header */}
-      <div className="flex justify-between">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            {course.title}
-          </h1>
-          <p className="text-lg text-gray-500 mb-6">{course.subtitle}</p>
+          <h1 className="text-3xl font-bold text-gray-800">{course.title}</h1>
+          <p className="text-lg text-gray-500 mt-1">{course.subtitle}</p>
         </div>
-        <div className="flex gap-2">
+
+        <div className="flex gap-3">
           <button
             onClick={() => navigate(`/orgadmin/update-course/${cId}`)}
-            className="bg-green-300 hover:bg-green-500 px-3 h-2/3 cursor-pointer"
+            className="bg-green-600 hover:bg-green-700 cursor-pointer text-white px-4 py-2 rounded-md shadow transition"
           >
             Update Course
           </button>
           <button
             onClick={handleDelete}
-            className="bg-red-300 hover:bg-red-500 px-3 h-2/3 cursor-pointer"
+            className="bg-red-600 hover:bg-red-700 cursor-pointer text-white px-4 py-2 rounded-md shadow transition"
           >
             Delete Course
           </button>
@@ -268,7 +267,7 @@ function CoursePage() {
 
       {/* Thumbnail */}
       {course.thumbnailUrl && (
-        <div className="mb-6">
+        <div className="mb-10">
           <img
             src={course.thumbnailUrl}
             alt="Course Thumbnail"
@@ -278,37 +277,37 @@ function CoursePage() {
       )}
 
       {/* Description */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2 text-gray-700">
-          Description
+      <div className="mb-10">
+        <h2 className="text-2xl font-bold mb-3 text-gray-800">
+          Course Description
         </h2>
-        <p className="text-gray-600">{course.description}</p>
+        <p className="text-gray-700 leading-relaxed text-base">
+          {course.description}
+        </p>
       </div>
 
       {/* Instructors Section */}
-      <div className="mb-8 border-t pt-6">
-        <h2 className="text-xl font-semibold mb-4 text-gray-700">
-          Instructors
-        </h2>
+      <div className="mb-10 border-t-2 border-violet-300 pt-10">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Instructors</h2>
 
-        {/* Existing instructors */}
+        {/* Existing Instructors */}
         {instructors.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             {instructors.map((instructor, idx) => (
               <div
                 key={idx}
-                className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg shadow-sm bg-white"
+                className="flex items-start gap-4 p-5 border border-gray-200 rounded-xl shadow-sm bg-white hover:shadow-md transition"
               >
                 <img
                   src={instructor.profileImageUrl}
                   alt={instructor.name}
-                  className="w-16 h-16 rounded-full object-cover border"
+                  className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
                 />
                 <div className="flex-grow">
-                  <h3 className="text-lg font-medium text-gray-800">
+                  <h3 className="text-lg font-semibold text-gray-800">
                     {instructor.name}
                   </h3>
-                  <p className="text-sm text-gray-600 mt-1 leading-relaxed">
+                  <p className="text-sm text-gray-600 mt-2 leading-relaxed">
                     {instructor.bio}
                   </p>
                 </div>
@@ -319,13 +318,13 @@ function CoursePage() {
                       setNewInstructor(instructor);
                       setShowAddInstructor(true);
                     }}
-                    className="px-3 py-1 cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-white rounded"
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-3 py-1.5 rounded transition"
                   >
                     Update
                   </button>
                   <button
                     onClick={() => handleRemoveInstructor(instructor.id)}
-                    className="px-3 py-1 cursor-pointer bg-red-400 hover:bg-red-500 text-white rounded"
+                    className="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1.5 rounded transition"
                   >
                     Remove
                   </button>
@@ -335,7 +334,7 @@ function CoursePage() {
           </div>
         )}
 
-        {/* Buttons for Add or Cancel */}
+        {/* Add Instructor Button */}
         {!showAddInstructor && (
           <button
             onClick={() => {
@@ -343,7 +342,7 @@ function CoursePage() {
               setEditInstructorIndex(null);
               setNewInstructor({ name: "", bio: "", profileImageUrl: "" });
             }}
-            className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+            className="mb-6 inline-block px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
           >
             Add New Instructor
           </button>
@@ -353,7 +352,7 @@ function CoursePage() {
         {showAddInstructor && (
           <form
             onSubmit={handleInstructorSubmit}
-            className="space-y-4 max-w-xl"
+            className="space-y-6 max-w-xl bg-gray-50 p-6 rounded-xl border"
           >
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -369,7 +368,7 @@ function CoursePage() {
                     name: e.target.value,
                   }))
                 }
-                className="w-full border px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                 placeholder="Instructor name"
                 required
               />
@@ -386,7 +385,7 @@ function CoursePage() {
                 onChange={(e) =>
                   setNewInstructor((prev) => ({ ...prev, bio: e.target.value }))
                 }
-                className="w-full border px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                 placeholder="Short bio"
                 required
               />
@@ -406,7 +405,7 @@ function CoursePage() {
                     profileImageUrl: e.target.value,
                   }))
                 }
-                className="w-full border px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                 placeholder="https://example.com/image.jpg"
                 required
               />
@@ -415,7 +414,7 @@ function CoursePage() {
             <div className="flex gap-4">
               <button
                 type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md"
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md"
               >
                 {editInstructorIndex !== null
                   ? "Update Instructor"
@@ -428,7 +427,7 @@ function CoursePage() {
                   setEditInstructorIndex(null);
                   setNewInstructor({ name: "", bio: "", profileImageUrl: "" });
                 }}
-                className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md"
+                className="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md"
               >
                 Cancel
               </button>
@@ -439,62 +438,86 @@ function CoursePage() {
 
       {/* Tags */}
       {course.tags?.length > 0 && (
-        <div className="mb-6 border-t pt-6">
-          <h2 className="text-xl font-semibold mb-2 text-gray-700">Tags</h2>
-          <div className="flex flex-wrap gap-2">
+        <div className="mb-12 border-t-2 border-violet-300 pt-10">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Tags</h2>
+          <div className="flex flex-wrap gap-3">
             {course.tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium"
+                className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-semibold shadow-sm hover:bg-blue-200 transition"
               >
-                {tag}
+                #{tag}
               </span>
             ))}
           </div>
         </div>
       )}
 
-      {/* Metadata */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 text-sm border-t pt-6 text-gray-700">
-        <div>
-          <span className="font-semibold">Language:</span> {course.language}
-        </div>
-        <div>
-          <span className="font-semibold">Category:</span> {course.category}
-        </div>
-        <div>
-          <span className="font-semibold">Visibility:</span> {course.visibility}
-        </div>
-        <div>
-          <span className="font-semibold">Free/Paid:</span>{" "}
-          {course.isFree ? "Free" : "Paid"}
-        </div>
-        <div>
-          <span className="font-semibold">Published:</span>{" "}
-          {course.isPublished ? "Yes" : "No"}
-          <button
-            onClick={handleTogglePublish}
-            className={`ml-4 px-3 py-1 rounded-2xl text-xs ${
-              course.isPublished
-                ? "bg-red-300 hover:bg-red-500"
-                : "bg-green-300 hover:bg-green-500"
-            }`}
-          >
-            {course.isPublished ? "Unpublish Course" : "Publish Course"}
-          </button>
-        </div>
-        <div>
-          <span className="font-semibold">Created By:</span>{" "}
-          {course.createdByAdminId}
+      {/* Details */}
+      <div className="mb-12 border-t-2 border-violet-300 pt-10">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Details</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-gray-700 text-sm">
+          <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <span className="block font-semibold text-gray-800">Language:</span>
+            <span className="mt-1 block text-gray-600">{course.language}</span>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <span className="block font-semibold text-gray-800">Category:</span>
+            <span className="mt-1 block text-gray-600">{course.category}</span>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <span className="block font-semibold text-gray-800">
+              Visibility:
+            </span>
+            <span className="mt-1 block text-gray-600">
+              {course.visibility}
+            </span>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <span className="block font-semibold text-gray-800">
+              Free/Paid:
+            </span>
+            <span className="mt-1 block text-gray-600">
+              {course.isFree ? "Free" : "Paid"}
+            </span>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <span className="block font-semibold text-gray-800">
+              Published:
+            </span>
+            <div className="mt-2 flex items-center gap-3">
+              <span className="text-gray-600">
+                {course.isPublished ? "Yes" : "No"}
+              </span>
+              <button
+                onClick={handleTogglePublish}
+                className={`text-xs px-3 py-1 rounded-2xl cursor-pointer font-medium transition ${
+                  course.isPublished
+                    ? "bg-red-100 text-red-700 hover:bg-red-200"
+                    : "bg-green-100 text-green-700 hover:bg-green-200"
+                }`}
+              >
+                {course.isPublished ? "Unpublish" : "Publish"}
+              </button>
+            </div>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <span className="block font-semibold text-gray-800">
+              Created By:
+            </span>
+            <span className="mt-1 block text-gray-600">
+              {course.createdByAdminId}
+            </span>
+          </div>
         </div>
       </div>
 
       {/* Certificate Sample Modal Trigger */}
       {course.certificateSampleUrl && (
-        <div className="mb-6  border-t pt-6">
+        <div className="mb-6 flex justify-center">
           <button
             onClick={openModal}
-            className="text-blue-600 underline hover:text-blue-800"
+            className="text-blue-400 underline hover:text-blue-600 text-lg cursor-pointer"
           >
             View Sample Certificate
           </button>
@@ -522,22 +545,22 @@ function CoursePage() {
 
       {/* FAQs Section */}
       {faqs.length > 0 && (
-        <div className="mt-12  border-t pt-6">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">
+        <div className="mt-16 border-t-2 border-violet-300 pt-10">
+          <h2 className="text-2xl font-bold mb-8 text-gray-800">
             Frequently Asked Questions
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-5 max-w-3xl">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="border rounded-xl overflow-hidden shadow-sm transition-all duration-300"
+                className="border border-gray-200 rounded-xl overflow-hidden shadow-sm bg-white transition-all duration-300"
               >
                 {/* FAQ Header */}
                 <button
                   onClick={() => toggleFaq(index)}
                   className="w-full flex justify-between items-center px-6 py-4 bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
                 >
-                  <span className="text-gray-800 font-medium text-base">
+                  <span className="text-gray-900 font-medium text-base text-left">
                     {faq.question}
                   </span>
                   <svg
@@ -557,9 +580,9 @@ function CoursePage() {
                   </svg>
                 </button>
 
-                {/* FAQ Answer + Delete Button */}
+                {/* FAQ Answer */}
                 {faqOpen[index] && (
-                  <div className="px-6 py-4 bg-white border-t text-gray-700 space-y-2">
+                  <div className="px-6 py-4 bg-white border-t text-gray-700 space-y-4">
                     <p className="text-sm leading-relaxed">{faq.answer}</p>
                     <div className="text-right">
                       <button
@@ -578,11 +601,14 @@ function CoursePage() {
       )}
 
       {/* Create FAQ Section */}
-      <div className="mt-8 py-8">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+      <div className="pt-10">
+        <h2 className="text-2xl font-bold mb-8 text-gray-800">
           Add a New FAQ
         </h2>
-        <form onSubmit={handleFaqSubmit} className="space-y-4 max-w-xl">
+        <form
+          onSubmit={handleFaqSubmit}
+          className="space-y-6 max-w-2xl bg-white p-6 rounded-xl shadow-md"
+        >
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Question
@@ -593,7 +619,7 @@ function CoursePage() {
               onChange={(e) =>
                 setNewFaq((prev) => ({ ...prev, question: e.target.value }))
               }
-              className="w-full border px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border border-gray-300 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter the question"
               required
             />
@@ -603,28 +629,30 @@ function CoursePage() {
               Answer
             </label>
             <textarea
-              rows={3}
+              rows={4}
               value={newFaq.answer}
               onChange={(e) =>
                 setNewFaq((prev) => ({ ...prev, answer: e.target.value }))
               }
-              className="w-full border px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border border-gray-300 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter the answer"
               required
             />
           </div>
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
-          >
-            Add FAQ
-          </button>
+          <div className="text-center">
+            <button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-md transition"
+            >
+              Add FAQ
+            </button>
+          </div>
         </form>
       </div>
 
       {/* Reviews Section */}
-      <div className="mb-8 border-t pt-6">
-        <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">
+      <div className="mt-16 border-t-2 border-violet-300 pt-10">
+        <h2 className="text-2xl font-bold mb-8 text-gray-800">
           Reviews
         </h2>
 
@@ -632,14 +660,14 @@ function CoursePage() {
         {reviews.length === 0 ? (
           <p className="text-center text-gray-500">No reviews yet.</p>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6 max-w-3xl">
             {reviews.map((review) => (
               <div
                 key={review.id}
-                className="p-4 border border-gray-200 rounded-lg shadow-sm bg-gray-50"
+                className="p-5 border border-gray-200 rounded-xl shadow-sm bg-gray-50"
               >
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-md font-semibold text-gray-800">
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="text-lg font-semibold text-gray-800">
                     {review.studentId}
                   </h3>
                   <div className="flex items-center space-x-1 text-yellow-500 text-sm">
@@ -647,7 +675,7 @@ function CoursePage() {
                       <svg
                         key={i}
                         xmlns="http://www.w3.org/2000/svg"
-                        className={`w-4 h-4 ${
+                        className={`w-5 h-5 ${
                           i < review.rating ? "fill-current" : "text-gray-300"
                         }`}
                         viewBox="0 0 20 20"
@@ -658,8 +686,10 @@ function CoursePage() {
                     ))}
                   </div>
                 </div>
-                <p className="text-gray-700 text-sm">{review.comment}</p>
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="text-gray-700 text-base leading-relaxed">
+                  {review.comment}
+                </p>
+                <p className="text-xs text-gray-400 mt-2">
                   {new Date(review.createdAt).toLocaleString()}
                 </p>
               </div>
@@ -669,21 +699,26 @@ function CoursePage() {
 
         {/* Buttons for Add or Cancel of Review */}
         {!showAddReview && (
-          <button
-            onClick={() => {
-              setShowAddReview(true);
-              setEditReviewIndex(null);
-              setNewReview({ studentId: "", rating: 0, comment: "" });
-            }}
-            className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-          >
-            Add New Review
-          </button>
+          <div className="max-w-3xl mx-auto text-center mt-8">
+            <button
+              onClick={() => {
+                setShowAddReview(true);
+                setEditReviewIndex(null);
+                setNewReview({ studentId: "", rating: 0, comment: "" });
+              }}
+              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
+            >
+              Add New Review
+            </button>
+          </div>
         )}
 
         {/* Add / Update Review Form */}
         {showAddReview && (
-          <form onSubmit={handleReviewSubmit} className="space-y-4 max-w-xl">
+          <form
+            onSubmit={handleReviewSubmit}
+            className="space-y-6 max-w-2xl mt-10 bg-white p-6 rounded-xl shadow-md"
+          >
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Name
@@ -698,7 +733,7 @@ function CoursePage() {
                     studentId: e.target.value,
                   }))
                 }
-                className="w-full border px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border border-gray-300 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Student name"
                 required
               />
@@ -717,7 +752,7 @@ function CoursePage() {
                     rating: parseInt(e.target.value, 10),
                   }))
                 }
-                className="w-full border px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border border-gray-300 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
                 <option value="" disabled>
@@ -737,21 +772,21 @@ function CoursePage() {
               </label>
               <textarea
                 name="comment"
-                rows={3}
+                rows={4}
                 value={newReview.comment}
                 onChange={(e) =>
                   setNewReview((prev) => ({ ...prev, comment: e.target.value }))
                 }
-                className="w-full border px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border border-gray-300 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Write your review here"
                 required
               />
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center">
               <button
                 type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md"
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md font-semibold transition"
               >
                 {editReviewIndex !== null ? "Update Review" : "Add Review"}
               </button>
@@ -762,7 +797,7 @@ function CoursePage() {
                   setEditReviewIndex(null);
                   setNewReview({ studentId: "", rating: 0, comment: "" });
                 }}
-                className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md"
+                className="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md font-semibold transition"
               >
                 Cancel
               </button>
