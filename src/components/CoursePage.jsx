@@ -2,20 +2,32 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   addInstructor,
+  addOutcome,
   addReview,
   createFaq,
   deleteCourse,
   deleteFaq,
   deleteInstructor,
+  deleteOutcome,
+  deleteReview,
   getCourseById,
   getFaq,
   getInstructors,
+  getOutcomes,
   getReviews,
   publishCourse,
   unpublishCourse,
   updateInstructor,
+  updateOutcome,
+  updateReview,
 } from "../services/OrgAdminService";
 import { toast } from "react-toastify";
+
+// const outcomes = [
+//   "Understand the fundamentals of JavaScript and ES6+ features",
+//   "Build full-stack web apps using React and Node.js",
+//   "Deploy applications on cloud platforms",
+// ];
 
 function CoursePage() {
   const [reviews, setReviews] = useState([]);
@@ -25,9 +37,21 @@ function CoursePage() {
     rating: 0,
     comment: "",
   });
+
   const [editReviewIndex, setEditReviewIndex] = useState(null);
 
   const [showAddReview, setShowAddReview] = useState(false);
+
+  const [outcomes, setOutcomes] = useState([]);
+
+  const [newOutcome, setNewOutcome] = useState({
+    description: "",
+    sequenceNumber: 0,
+  });
+
+  const [editOutcomeIndex, setEditOutcomeIndex] = useState(null);
+
+  const [showAddOutcome, setShowAddOutcome] = useState(false);
 
   const [editInstructorIndex, setEditInstructorIndex] = useState(null);
 
@@ -93,11 +117,23 @@ function CoursePage() {
     }
   };
 
+  const fetchOutcomes = async () => {
+    try {
+      const response = await getOutcomes(cId);
+      setOutcomes(response.data);
+      console.log("Outcomes fetched:", response.data);
+    } catch (error) {
+      console.error("Error fetching outcomes:", error);
+      toast.error("Failed to fetch outcomes");
+    }
+  };
+
   useEffect(() => {
     fetchCourse();
     fetchFaqs();
     fetchInstructors();
     fetchReviews();
+    fetchOutcomes();
   }, [cId]);
 
   //console.log(faqs);
@@ -214,7 +250,7 @@ function CoursePage() {
 
     try {
       if (editReviewIndex !== null) {
-        const reviewToUpdate = instructors[editReviewIndex];
+        const reviewToUpdate = reviews[editReviewIndex];
         const reviewId = reviewToUpdate.id;
 
         await updateReview(cId, reviewId, newReview);
@@ -224,13 +260,64 @@ function CoursePage() {
         toast.success("Review added successfully");
       }
 
-      setNewReview({ name: "", bio: "", profileImageUrl: "" });
+      setNewReview({ studentId: "", rating: 0, comment: "" });
       setShowAddReview(false);
       setEditReviewIndex(null);
       fetchReviews();
     } catch (error) {
       console.error("Error saving review:", error);
       toast.error("Failed to save review");
+    }
+  };
+
+  const handleDeleteReview = async (reviewId) => {
+    try {
+      // call your backend service (you must implement this)
+      await deleteReview(cId, reviewId); // make sure this exists in OrgAdminService
+      toast.success("Review deleted successfully");
+      fetchReviews();
+    } catch (error) {
+      toast.error("Failed to delete review");
+      console.error("Delete review error:", error);
+    }
+  };
+
+  const handleOutcomeSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!newOutcome.description || newOutcome.sequenceNumber <= 0) {
+      toast.warning("Please fill all fields");
+      return;
+    }
+
+    try {
+      if (editOutcomeIndex !== null) {
+        const outcomeToUpdate = outcomes[editOutcomeIndex];
+        await updateOutcome(cId, outcomeToUpdate.id, newOutcome);
+        toast.success("Outcome updated successfully");
+      } else {
+        await addOutcome(cId, newOutcome);
+        toast.success("Outcome added successfully");
+      }
+
+      setNewOutcome({ description: "", sequenceNumber: 0 });
+      setShowAddOutcome(false);
+      setEditOutcomeIndex(null);
+      fetchOutcomes();
+    } catch (error) {
+      console.error("Error saving outcome:", error);
+      toast.error("Failed to save outcome");
+    }
+  };
+
+  const handleDeleteOutcome = async (outcomeId) => {
+    try {
+      await deleteOutcome(outcomeId);
+      toast.success("Outcome deleted successfully");
+      fetchOutcomes();
+    } catch (error) {
+      toast.error("Failed to delete outcome");
+      console.error("Delete outcome error:", error);
     }
   };
 
@@ -527,18 +614,23 @@ function CoursePage() {
       {/* Certificate Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="relative w-[90vw] h-[90vh] bg-white rounded-md shadow-xl overflow-hidden">
+          <div className="relative flex justify-center items-center w-[90vw] h-[90vh] bg-white rounded-md shadow-xl overflow-hidden">
             <button
               onClick={closeModal}
-              className="absolute top-3 right-4 text-3xl font-bold text-gray-700 hover:text-black z-10"
+              className="absolute cursor-pointer top-3 right-4 text-3xl font-bold text-gray-700 hover:text-black z-10"
             >
               &times;
             </button>
-            <iframe
+            <img
+              src={course.certificateSampleUrl}
+              title="Certificate Sample"
+              className="w-2/3 h-2/3 border-none"
+            />
+            {/* <iframe
               src={course.certificateSampleUrl}
               title="Certificate Sample"
               className="w-full h-full border-none"
-            ></iframe>
+            ></iframe> */}
           </div>
         </div>
       )}
@@ -602,9 +694,7 @@ function CoursePage() {
 
       {/* Create FAQ Section */}
       <div className="pt-10">
-        <h2 className="text-2xl font-bold mb-8 text-gray-800">
-          Add a New FAQ
-        </h2>
+        <h2 className="text-2xl font-bold mb-8 text-gray-800">Add a New FAQ</h2>
         <form
           onSubmit={handleFaqSubmit}
           className="space-y-6 max-w-2xl bg-white p-6 rounded-xl shadow-md"
@@ -652,9 +742,7 @@ function CoursePage() {
 
       {/* Reviews Section */}
       <div className="mt-16 border-t-2 border-violet-300 pt-10">
-        <h2 className="text-2xl font-bold mb-8 text-gray-800">
-          Reviews
-        </h2>
+        <h2 className="text-2xl font-bold mb-8 text-gray-800">Reviews</h2>
 
         {/* Existing Reviews */}
         {reviews.length === 0 ? (
@@ -685,6 +773,31 @@ function CoursePage() {
                       </svg>
                     ))}
                   </div>
+
+                  <div className="flex justify-end gap-3 mt-3">
+                    <button
+                      onClick={() => {
+                        setEditReviewIndex(
+                          reviews.findIndex((r) => r.id === review.id)
+                        );
+                        setNewReview({
+                          studentId: review.studentId,
+                          rating: review.rating,
+                          comment: review.comment,
+                        });
+                        setShowAddReview(true);
+                      }}
+                      className="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-4 py-1.5 rounded transition"
+                    >
+                      Update
+                    </button>
+                    <button
+                      onClick={() => handleDeleteReview(review.id)}
+                      className="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-1.5 rounded transition"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
                 <p className="text-gray-700 text-base leading-relaxed">
                   {review.comment}
@@ -699,7 +812,7 @@ function CoursePage() {
 
         {/* Buttons for Add or Cancel of Review */}
         {!showAddReview && (
-          <div className="max-w-3xl mx-auto text-center mt-8">
+          <div className="max-w-3xl text-left mt-8">
             <button
               onClick={() => {
                 setShowAddReview(true);
@@ -798,6 +911,134 @@ function CoursePage() {
                   setNewReview({ studentId: "", rating: 0, comment: "" });
                 }}
                 className="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md font-semibold transition"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+
+      {/* Course Outcomes Section */}
+      <div className="mt-16 border-t-2 border-violet-300 pt-10">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          Course Outcomes
+        </h2>
+        <div className="bg-white rounded-xl shadow p-6 mt-6">
+          {outcomes && outcomes.length > 0 ? (
+            <ul className="list-disc pl-6 space-y-2 text-gray-700">
+              {[...outcomes]
+                .sort((a, b) => a.sequenceNumber - b.sequenceNumber)
+                .map((outcome) => (
+                  <li
+                    key={outcome.id}
+                    className="flex justify-between items-start"
+                  >
+                    <span>{outcome.description}</span>
+                    <div className="flex gap-2 ml-4">
+                      <button
+                        onClick={() => {
+                          setEditOutcomeIndex(
+                            outcomes.findIndex((o) => o.id === outcome.id)
+                          );
+                          setNewOutcome({
+                            description: outcome.description,
+                            sequenceNumber: outcome.sequenceNumber,
+                          });
+                          setShowAddOutcome(true);
+                        }}
+                        className="text-yellow-600 hover:underline text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteOutcome(outcome.id)}
+                        className="text-red-600 hover:underline text-sm"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </li>
+                ))}
+            </ul>
+          ) : (
+            <p className="text-gray-500">No outcomes listed yet.</p>
+          )}
+        </div>
+      </div>
+
+      {/* Outcome Actions */}
+      <div className="mt-6">
+        {!showAddOutcome && (
+          <button
+            onClick={() => {
+              setShowAddOutcome(true);
+              setEditOutcomeIndex(null);
+              setNewOutcome({ description: "", sequenceNumber: 0 });
+            }}
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
+          >
+            Add New Outcome
+          </button>
+        )}
+
+        {showAddOutcome && (
+          <form
+            onSubmit={handleOutcomeSubmit}
+            className="space-y-6 mt-6 max-w-2xl bg-white p-6 rounded-xl shadow-md"
+          >
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Outcome Description
+              </label>
+              <textarea
+                value={newOutcome.description}
+                onChange={(e) =>
+                  setNewOutcome((prev) => ({
+                    ...prev,
+                    description: e.target.value,
+                  }))
+                }
+                className="w-full border border-gray-300 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Describe the course outcome"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Sequence Number
+              </label>
+              <input
+                type="number"
+                min="1"
+                value={newOutcome.sequenceNumber}
+                onChange={(e) =>
+                  setNewOutcome((prev) => ({
+                    ...prev,
+                    sequenceNumber: parseInt(e.target.value, 10),
+                  }))
+                }
+                className="w-full border border-gray-300 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                type="submit"
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md"
+              >
+                {editOutcomeIndex !== null ? "Update Outcome" : "Add Outcome"}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowAddOutcome(false);
+                  setEditOutcomeIndex(null);
+                  setNewOutcome({ description: "", sequenceNumber: 0 });
+                }}
+                className="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md"
               >
                 Cancel
               </button>

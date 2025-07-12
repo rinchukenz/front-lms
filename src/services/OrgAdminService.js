@@ -152,6 +152,54 @@ export const getReviews = (cId) => {
   });
 };
 
+export const getOutcomes = (cId) => {
+  return axios.get(`${REST_API_BASE_URL}/api/courses/outcomes/${cId}`,{
+    headers: {
+      Authorization: `Bearer ${TOKEN}`
+    }
+  });
+}
+
+export const addOutcome = (cId, newOutcome) => {
+  return axios.post(
+    `${REST_API_BASE_URL}/api/courses/outcomes`,
+    {
+      courseId: cId,           
+      description: newOutcome.description,
+      sequenceNumber: newOutcome.sequenceNumber,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    }
+  );
+};
+
+export const updateOutcome = (cId, outcomeId, newOutcome) => {
+  return axios.put(
+    `${REST_API_BASE_URL}/api/courses/outcomes/${outcomeId}`,
+    {
+      courseId: cId,           
+      description: newOutcome.description,
+      sequenceNumber: newOutcome.sequenceNumber,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    }
+  );
+};
+
+export const deleteOutcome = (outcomeId) => {
+  return axios.delete(`${REST_API_BASE_URL}/api/courses/outcomes/ ${outcomeId}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
 export const addReview = (cId, newReview) => {
   return axios.post(
     `${REST_API_BASE_URL}/api/courses/${cId}/reviews`,
@@ -171,8 +219,25 @@ export const addReview = (cId, newReview) => {
 
 export const updateReview = (cId, reviewId, newReview) => {
   return axios.put(
-    `${REST_API_BASE_URL}/api/courses/${cId}/instructors/${reviewId}`,
-    newReview,
+    `${REST_API_BASE_URL}/api/courses/${cId}/reviews/${reviewId}`,
+    {
+      courseId: cId, // Include courseId if your backend expects it
+      studentId: newReview.studentId,
+      rating: newReview.rating,
+      comment: newReview.comment,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    }
+  );
+};
+
+
+export const deleteReview = (cId, reviewId) => {
+  return axios.delete(
+    `${REST_API_BASE_URL}/api/courses/${cId}/reviews/${reviewId}`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
