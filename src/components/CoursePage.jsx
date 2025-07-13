@@ -373,6 +373,16 @@ function CoursePage() {
         </p>
       </div>
 
+      {/* Course Modules Button */}
+      <div className="mb-10">
+        <button
+          onClick={() => navigate(`/orgadmin/courses/${cId}/syllabus`)}
+          className="bg-violet-500 px-3 py-2 cursor-pointer hover:bg-violet-600 text-white"
+        >
+          View/Manage Course Syllabus
+        </button>
+      </div>
+
       {/* Instructors Section */}
       <div className="mb-10 border-t-2 border-violet-300 pt-10">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Instructors</h2>

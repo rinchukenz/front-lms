@@ -6,8 +6,9 @@ const token = localStorage.getItem("token");
 
 const TOKEN = token;
 
-// http://localhost:8080/api/courses/org/b7a0daa7-6bb8-4cb0-b6ee-7e7193917aa8
 
+
+// COURSES
 export const getAllCourses = (orgId) => {
   return axios.get(`${REST_API_BASE_URL}/api/courses/org/${orgId}`, {
     headers: {
@@ -32,6 +33,41 @@ export const getCourseById = (cId) => {
   });
 };
 
+export const EditCourse = (cId, updatedData) => {
+  return axios.put(`${REST_API_BASE_URL}/api/courses/${cId}`, updatedData, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+
+export const deleteCourse = (cId) => {
+  return axios.delete(`${REST_API_BASE_URL}/api/courses/${cId}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+export const publishCourse = (cId) => {
+  return axios.put(`${REST_API_BASE_URL}/api/courses/${cId}/publish`, null, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+export const unpublishCourse = (cId) => {
+  return axios.put(`${REST_API_BASE_URL}/api/courses/${cId}/unpublish`, null, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+
+//FAQS
 export const getFaq = (cId) => {
   return axios.get(`${REST_API_BASE_URL}/api/courses/${cId}/faqs`, {
     headers: {
@@ -66,6 +102,9 @@ export const deleteFaq = (cId, fId) => {
   });
 };
 
+
+
+// INSTRUCTORS
 export const addInstructor = (cId, newInstructor) => {
   return axios.post(
     `${REST_API_BASE_URL}/api/courses/${cId}/instructors`,
@@ -111,47 +150,11 @@ export const deleteInstructor = (cId, instructorId) => {
   });
 };
 
-export const EditCourse = (cId, updatedData) => {
-  return axios.put(`${REST_API_BASE_URL}/api/courses/${cId}`, updatedData, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
-};
 
 
-export const deleteCourse = (cId) => {
-  return axios.delete(`${REST_API_BASE_URL}/api/courses/${cId}`, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
-};
 
-export const publishCourse = (cId) => {
-  return axios.put(`${REST_API_BASE_URL}/api/courses/${cId}/publish`, null, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
-};
 
-export const unpublishCourse = (cId) => {
-  return axios.put(`${REST_API_BASE_URL}/api/courses/${cId}/unpublish`, null, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
-};
-
-export const getReviews = (cId) => {
-  return axios.get(`${REST_API_BASE_URL}/api/courses/${cId}/reviews`, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`
-    }
-  });
-};
-
+// OUTCOMES
 export const getOutcomes = (cId) => {
   return axios.get(`${REST_API_BASE_URL}/api/courses/outcomes/${cId}`,{
     headers: {
@@ -200,6 +203,16 @@ export const deleteOutcome = (outcomeId) => {
   });
 };
 
+
+//REVIEWS
+export const getReviews = (cId) => {
+  return axios.get(`${REST_API_BASE_URL}/api/courses/${cId}/reviews`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`
+    }
+  });
+};
+
 export const addReview = (cId, newReview) => {
   return axios.post(
     `${REST_API_BASE_URL}/api/courses/${cId}/reviews`,
@@ -238,6 +251,66 @@ export const updateReview = (cId, reviewId, newReview) => {
 export const deleteReview = (cId, reviewId) => {
   return axios.delete(
     `${REST_API_BASE_URL}/api/courses/${cId}/reviews/${reviewId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    }
+  );
+};
+
+
+// SECTIONS
+export const addSection = (newSection) => {
+  return axios.post(
+    `${REST_API_BASE_URL}/api/sections`,
+    newSection,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    }
+  );
+}
+
+export const getSections = (cId) => {
+  return axios.get(`${REST_API_BASE_URL}/api/sections/course/${cId}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`
+    }
+  });
+};
+
+export const publishSection = (sId) => {
+  return axios.put(`${REST_API_BASE_URL}/api/sections/${sId}/publish`, null, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+export const unpublishSection = (sId) => {
+  return axios.put(`${REST_API_BASE_URL}/api/sections/${sId}/unpublish`, null, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+export const deleteSection = (sId) => {
+  return axios.delete(`${REST_API_BASE_URL}/api/sections/${sId}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+
+// CONTENTS
+export const addContent = (newContent) => {
+  return axios.post(
+    `${REST_API_BASE_URL}/api/contents`,
+    newContent,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,

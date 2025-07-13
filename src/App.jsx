@@ -32,6 +32,8 @@ import CourseData from "./components/CourseData";
 import AddContent from "./components/AddContent";
 import AddCourse from "./components/AddCourse";
 import CoursePage from "./components/CoursePage";
+import CourseModules from "./components/CourseModules";
+import CourseSyllabus from "./components/CourseSyllabus";
 
 function App() {
   return (
@@ -83,6 +85,7 @@ function App() {
             <Route path="courses/:cId" element={<CoursePage />} />
             <Route path="update-course/:cId" element={<AddCourse />} />
             <Route path="courses/:cId/add-content" element={<AddContent />} />
+            <Route path="courses/:cId/syllabus" element={<CourseSyllabus />} />
             <Route path="assessments" element={<ComingSoon />} />
             <Route path="live-class" element={<ComingSoon />} />
             <Route path="certificates" element={<ComingSoon />} />

@@ -21,7 +21,6 @@ import {
 import { useNavigate } from "react-router-dom";
 
 function SuperAdminDashboard() {
-
   const navigate = useNavigate();
 
   function goToRequests() {
@@ -34,12 +33,6 @@ function SuperAdminDashboard() {
   const [orgCount, setOrgCount] = useState([]);
   const [pendingRequestsCount, setPendingRequestsCount] = useState([]);
   const pageSize = 5;
-
-  useEffect(() => {
-    getActivities(0);
-    OrganizationCount();
-    getPendingRequests();
-  }, []);
 
   const getActivities = async (pageNum = 0) => {
     try {
@@ -157,6 +150,12 @@ function SuperAdminDashboard() {
     "#6366F1",
     "#F43F5E",
   ];
+
+  useEffect(() => {
+    getActivities(0);
+    OrganizationCount();
+    getPendingRequests();
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 space-y-12 bg-white min-h-screen">
