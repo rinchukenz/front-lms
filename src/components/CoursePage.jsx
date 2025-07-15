@@ -982,9 +982,27 @@ function CoursePage() {
         {!showAddOutcome && (
           <button
             onClick={() => {
+              // Only generate sequence number when adding, not editing
+              let nextSeq = 1;
+              if (outcomes && outcomes.length > 0) {
+                const existingNumbers = outcomes
+                  .map((o) => o.sequenceNumber)
+                  .sort((a, b) => a - b);
+                for (let i = 0; i < existingNumbers.length; i++) {
+                  if (existingNumbers[i] !== i + 1) {
+                    nextSeq = i + 1;
+                    break;
+                  }
+                  nextSeq = existingNumbers.length + 1;
+                }
+              }
+
               setShowAddOutcome(true);
-              setEditOutcomeIndex(null);
-              setNewOutcome({ description: "", sequenceNumber: 0 });
+              setEditOutcomeIndex(null); // clear edit mode
+              setNewOutcome({
+                description: "",
+                sequenceNumber: nextSeq, // only for adding
+              });
             }}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
           >
@@ -1023,14 +1041,8 @@ function CoursePage() {
                 type="number"
                 min="1"
                 value={newOutcome.sequenceNumber}
-                onChange={(e) =>
-                  setNewOutcome((prev) => ({
-                    ...prev,
-                    sequenceNumber: parseInt(e.target.value, 10),
-                  }))
-                }
-                className="w-full border border-gray-300 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
+                disabled
+                className="w-full border border-gray-200 bg-gray-100 text-gray-600 px-4 py-2 rounded-md shadow-sm cursor-not-allowed"
               />
             </div>
 

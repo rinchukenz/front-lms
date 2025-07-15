@@ -196,7 +196,7 @@ export const updateOutcome = (cId, outcomeId, newOutcome) => {
 };
 
 export const deleteOutcome = (outcomeId) => {
-  return axios.delete(`${REST_API_BASE_URL}/api/courses/outcomes/ ${outcomeId}`, {
+  return axios.delete(`${REST_API_BASE_URL}/api/courses/outcomes/${outcomeId}`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
     },
@@ -317,4 +317,36 @@ export const addContent = (newContent) => {
       },
     }
   );
+};
+
+export const getContents = (cId) => {
+  return axios.get(`${REST_API_BASE_URL}/api/contents/course/${cId}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`
+    }
+  });
+}
+
+export const deleteContent = (contentId) => {
+  return axios.delete(`${REST_API_BASE_URL}/api/contents/${contentId}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+export const publishContent = (contentId) => {
+  return axios.put(`${REST_API_BASE_URL}/api/contents/${contentId}/publish`, null, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+export const unpublishContent = (contentId) => {
+  return axios.put(`${REST_API_BASE_URL}/api/contents/${contentId}/unpublish`, null, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
 };

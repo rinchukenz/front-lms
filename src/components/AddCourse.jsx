@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { createCourse, getCourseById, EditCourse } from "../services/OrgAdminService";
+import {
+  createCourse,
+  getCourseById,
+  EditCourse,
+} from "../services/OrgAdminService";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
@@ -75,7 +79,7 @@ function AddCourse() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-xl rounded-2xl mt-10">
+    <div className="max-w-2xl mx-auto p-6 bg-white border border-[#979797] rounded-2xl mt-10">
       <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
         {cId ? "Update Course" : "Add New Course"}
       </h2>
@@ -90,7 +94,7 @@ function AddCourse() {
             placeholder="e.g. Java Masterclass"
             value={formData.title}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-violet-500 focus:outline-none"
           />
         </div>
 
@@ -216,19 +220,21 @@ function AddCourse() {
             name="visibility"
             value={formData.visibility}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-1/4 border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
           >
             <option value="PUBLIC">Public</option>
             <option value="PRIVATE">Private</option>
           </select>
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md font-medium text-lg transition-all duration-300"
-        >
-          {cId ? "Update Course" : "Create Course"}
-        </button>
+        <div className="w-full flex justify-center mt-6">
+          <button
+            type="submit"
+            className="w-1/3 mx-auto bg-[#9D5CFF] hover:bg-violet-700 text-white py-2 rounded-md font-medium text-lg transition-all duration-300"
+          >
+            {cId ? "Update Course" : "Create Course"}
+          </button>
+        </div>
       </form>
     </div>
   );
