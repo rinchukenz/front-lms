@@ -2,12 +2,20 @@ import React from "react";
 import CalendarCarousel from "../../components/Calender/CalendarCarousel";
 import ProgressTracking from "../../components/ProgressTracking/ProgressTracking";
 import profileImage from "../../assets/propicture.jpeg";
+import { useAuth } from "../../context/AuthContext";
+import { jwtDecode } from "jwt-decode";
 
 function StudentDashboard() {
+  const { studentAuth } = useAuth();
+  console.log(studentAuth);
+  //const {user, token} = auth;
+  //const decoded = jwtDecode(token);
+  //console.log("Decode : ",decoded);
+
   return (
-    <div className="relative min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Welcome Message */}
-      <div className="w-full flex items-center justify-center sm:mt-5">
+      <div className="w-full flex items-center justify-center sm:mt-15">
         <div className="basis-1/3 flex justify-center">
           <img
             className="object-cover rounded-full w-18 h-18 sm:w-25 sm:h-25 md:w-30 md:h-30 lg:w-30 lg:h-30"
@@ -20,7 +28,7 @@ function StudentDashboard() {
             Welcome back,
           </h3>
           <h3 className="font-sans font-semibold text-3xl sm:text-6xl py-1 sm:py-2 text-center bg-gradient-to-r from-violet-500 to-pink-400 text-transparent bg-clip-text">
-            Adithya
+            {studentAuth.name?.split(" ")[0]}
           </h3>
         </div>
       </div>

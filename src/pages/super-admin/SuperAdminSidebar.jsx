@@ -17,8 +17,7 @@ function SuperAdminSidebar() {
   const getActiveOption = () => {
     if (location.pathname.includes("admin-requests")) return "Admin Requests";
     if (location.pathname === "/superadmin") return "Dashboard";
-    if (location.pathname.includes("admin-management"))
-      return "Admin Management";
+    if (location.pathname.includes("admin-management")) return "Admin Management";
     if (location.pathname.includes("org-admins")) return "Org Admins";
     if (location.pathname.includes("organizations")) return "Organizations";
     if (location.pathname.includes("live-class")) return "Live Class";
@@ -69,6 +68,15 @@ function SuperAdminSidebar() {
           />
         </Link>
 
+        <Link to="/superadmin/courses">
+          <SideOption
+            text="Courses"
+            icon={book}
+            isActive={activeOption === "Courses"}
+            color="black"
+          />
+        </Link>
+
         <Link to="/superadmin/settings">
           <SideOption
             text="Settings"
@@ -80,9 +88,9 @@ function SuperAdminSidebar() {
       </div>
 
       {/* Logout */}
-      <div className="mt-auto pt-6">
+      {/* <div className="mt-auto pt-6">
         <LogOutButton />
-      </div>
+      </div> */}
     </div>
   );
 }

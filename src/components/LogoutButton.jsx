@@ -8,7 +8,7 @@ const LogOutButton = () => {
   return (
     <button
       onClick={logout}
-      className="w-full cursor-pointer text-center text-red-500 hover:text-red-600 font-semibold py-2 transition-all duration-200"
+      className="w-full cursor-pointer text-right text-red-500 hover:text-red-600 font-semibold py-2 transition-all duration-200"
     >
       <MdLogout className="inline-block mr-2" />
       Sign out

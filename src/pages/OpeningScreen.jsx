@@ -82,7 +82,7 @@ function OpeningScreen() {
   }
 
   return (
-    <div className="CONTAINER min-h-screen flex flex-col items-center justify-center space-y-5 sm:items-center sm:justify-center py-10 bg-gradient-to-b from-purple-400 via-pink-100 to-white">
+    <div className="CONTAINER min-h-screen flex flex-col items-center justify-center space-y-5 sm:items-center sm:justify-center py-10 bg-gradient-to-br from-purple-500 via-pink-100 to-white">
       {/* Responsive container */}
       <div className="TOP-CONTAINER w-full max-w-5xl flex flex-col space-y-30 justify-between sm:flex-col md:flex-row items-center md:items-start gap-8 md:gap-16">
         {/* Animation Container */}
@@ -105,7 +105,7 @@ function OpeningScreen() {
 
         {/* Text section */}
         <div
-          className={`flex-1/5 mt-15 text-center lg:text-left transform transition-all duration-1000 ease-out ${
+          className={`flex-1/5 mt-15 ml-10 text-center lg:text-left transform transition-all duration-1000 ease-out ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
           }`}
         >
@@ -122,7 +122,7 @@ function OpeningScreen() {
                 </span>
               </h1>
 
-              <p className="text-xxs px-8 sm:text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed font-medium">
+              <p className="text-xxs sm:text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed font-medium">
                 Discover a world of knowledge with our interactive learning
                 platform. Join thousands of students on their journey to
                 success.

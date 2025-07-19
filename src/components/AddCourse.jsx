@@ -71,7 +71,7 @@ function AddCourse() {
         toast.success("Course created successfully");
       }
 
-      navigate("/orgadmin/courses");
+      navigate(`/orgadmin/courses`);
     } catch (err) {
       toast.error("Operation failed");
       console.error(err);
@@ -233,6 +233,13 @@ function AddCourse() {
             className="w-1/3 mx-auto bg-[#9D5CFF] hover:bg-violet-700 text-white py-2 rounded-md font-medium text-lg transition-all duration-300"
           >
             {cId ? "Update Course" : "Create Course"}
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className=" hover:bg-gray-100 cursor-pointer px-6 py-2 border rounded-md"
+          >
+            Cancel
           </button>
         </div>
       </form>

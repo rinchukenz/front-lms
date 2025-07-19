@@ -368,6 +368,131 @@ export default CourseSyllabus;
 
 
 
+ <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg">
+            <form
+              onSubmit={handleInstructorSubmit}
+              className="space-y-4"
+            >
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={newInstructor.name}
+                  onChange={(e) =>
+                    setNewInstructor((prev) => ({
+                      ...prev,
+                      name: e.target.value,
+                    }))
+                  }
+                  className="w-full border px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  placeholder="Instructor name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Bio
+                </label>
+                <textarea
+                  name="bio"
+                  rows={3}
+                  value={newInstructor.bio}
+                  onChange={(e) =>
+                    setNewInstructor((prev) => ({
+                      ...prev,
+                      bio: e.target.value,
+                    }))
+                  }
+                  className="w-full border px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  placeholder="Short bio"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Profile Image URL
+                </label>
+                <input
+                  type="url"
+                  name="profileImageUrl"
+                  value={newInstructor.profileImageUrl}
+                  onChange={(e) =>
+                    setNewInstructor((prev) => ({
+                      ...prev,
+                      profileImageUrl: e.target.value,
+                    }))
+                  }
+                  className="w-full border px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  placeholder="https://example.com/image.jpg"
+                  required
+                />
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  type="submit"
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md"
+                >
+                  {editInstructorIndex !== null
+                    ? "Update Instructor"
+                    : "Add Instructor"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowAddInstructor(false);
+                    setEditInstructorIndex(null);
+                    setNewInstructor({
+                      name: "",
+                      bio: "",
+                      profileImageUrl: "",
+                    });
+                  }}
+                  className="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+
+
+
+{/* <div className="inline-flex border border-gray-300 rounded-lg overflow-hidden">
+        <button
+          onClick={() => setLoginType("ADMIN")}
+          className={`px-4 py-2 text-sm font-medium ${
+            loginType === "ADMIN"
+              ? "bg-violet-600 text-white"
+              : "bg-white text-gray-700 hover:bg-gray-100"
+          }`}
+        >
+          ADMIN
+        </button>
+        <button
+          onClick={() => setLoginType("USER")}
+          className={`px-4 py-2 text-sm font-medium ${
+            loginType === "USER"
+              ? "bg-violet-600 text-white"
+              : "bg-white text-gray-700 hover:bg-gray-100"
+          }`}
+        >
+          USER
+        </button>
+      </div>
+      {loginType === "USER" ? <StudentLogin /> : <Login />} */}
+
+
+
+
+
+
+
 
 
 

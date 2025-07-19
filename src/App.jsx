@@ -34,6 +34,8 @@ import AddCourse from "./components/AddCourse";
 import CoursePage from "./components/CoursePage";
 import CourseModules from "./components/CourseModules";
 import CourseSyllabus from "./components/CourseSyllabus";
+import StudentLogin from "./components/StudentLogin";
+import SuperAdminCourses from "./pages/super-admin/SuperAdminCourses";
 
 function App() {
   return (
@@ -41,10 +43,11 @@ function App() {
       <Routes>
         <Route path="/" element={<OpeningScreen />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/login/user" element={<StudentLogin />} />
         <Route path="/signup" element={<SignUpPage />} />
 
         {/* Student Routes */}
-        <Route element={<ProtectedRoute allowedRoles={["SUPER_ADMIN"]} />}>
+        <Route element={<ProtectedRoute allowedRoles={["USER"]} />}>
           <Route path="/student" element={<StudentHome />}>
             <Route index element={<StudentDashboard />} />
             <Route path="assignments" element={<Assingments />} />
@@ -62,6 +65,7 @@ function App() {
           <Route path="/superadmin" element={<SuperAdminHome />}>
             <Route index element={<SuperAdminDashboard />} />
             <Route path="org-admins" element={<AdminRequests />} />
+            <Route path="courses" element={<SuperAdminCourses />} />
             <Route path="organizations" element={<Orgs />} />
             <Route path="organizations/addorg" element={<AddOrg />} />
             <Route path="organizations/addadmin/:orgId" element={<AdminReg />} />

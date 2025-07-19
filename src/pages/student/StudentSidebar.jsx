@@ -1,23 +1,25 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import SideOption from "../../components/SideOption/SideOption";
-import dashboard from "../../assets/dashboard.svg";
-import book from "../../assets/book-solid.svg";
-import assignment from "../../assets/assignment.svg";
-import calendar from "../../assets/calendar.svg";
-import exam from "../../assets/exam.svg";
-import skyllx from "../../assets/skyllx.png";
-import certificate from "../../assets/certificate.svg";
-import settings from "../../assets/settings.svg";
-import speaker from "../../assets/speaker.svg";
+import LogOutButton from "../../components/LogOutButton";
+
+import {
+  LayoutDashboard,
+  BookOpen,
+  FileText,
+  FileSignature,
+  CalendarDays,
+  BadgeCheck,
+  Settings,
+  Megaphone,
+} from "lucide-react";
 
 function StudentSidebar() {
   const location = useLocation();
 
-  // Map pathnames to active option names
   const getActiveOption = () => {
-    if (location.pathname.includes("/home/courses")) return "Courses";
-    if (location.pathname === "/home") return "Dashboard";
+    if (location.pathname === "/student") return "Dashboard";
+    if (location.pathname.includes("courses")) return "Courses";
     if (location.pathname.includes("assignments")) return "Assignments";
     if (location.pathname.includes("exams")) return "Exams";
     if (location.pathname.includes("calendar")) return "Calendar";
@@ -30,15 +32,19 @@ function StudentSidebar() {
   const activeOption = getActiveOption();
 
   return (
-    <div className="h-full w-full flex flex-col items-center py-6 gap-12 bg-gray-100">
-      <div className="flex items-center gap-2">
-        <h3 className="font-bold text-2xl">Student</h3>
+    <div className="h-full w-full flex flex-col items-center py-6 gap-8 bg-[#F9F9F9] border-r border-[#B8B8B8] overflow-y-auto">
+      {/* Header */}
+      <div className="flex flex-col items-center justify-center gap-2">
+        <h3 className="font-bold text-xl text-black">Student Panel</h3>
+        <h4 className="text-sm text-gray-700">LMS Portal</h4>
       </div>
-      <div className="options">
+
+      {/* Sidebar Options */}
+      <div className="options w-full px-2">
         <Link to="/student">
           <SideOption
             text="Dashboard"
-            icon={dashboard}
+            Icon={LayoutDashboard}
             isActive={activeOption === "Dashboard"}
           />
         </Link>
@@ -46,7 +52,7 @@ function StudentSidebar() {
         <Link to="/student/courses">
           <SideOption
             text="Courses"
-            icon={book}
+            Icon={BookOpen}
             isActive={activeOption === "Courses"}
           />
         </Link>
@@ -54,7 +60,7 @@ function StudentSidebar() {
         <Link to="/student/assignments">
           <SideOption
             text="Assignments"
-            icon={assignment}
+            Icon={FileText}
             isActive={activeOption === "Assignments"}
           />
         </Link>
@@ -62,7 +68,7 @@ function StudentSidebar() {
         <Link to="/student/exams">
           <SideOption
             text="Exams"
-            icon={exam}
+            Icon={FileSignature}
             isActive={activeOption === "Exams"}
           />
         </Link>
@@ -70,7 +76,7 @@ function StudentSidebar() {
         <Link to="/student/calendar">
           <SideOption
             text="Calendar"
-            icon={calendar}
+            Icon={CalendarDays}
             isActive={activeOption === "Calendar"}
           />
         </Link>
@@ -78,7 +84,7 @@ function StudentSidebar() {
         <Link to="/student/announcement">
           <SideOption
             text="Announcement"
-            icon={speaker}
+            Icon={Megaphone}
             isActive={activeOption === "Announcement"}
           />
         </Link>
@@ -86,7 +92,7 @@ function StudentSidebar() {
         <Link to="/student/certificates">
           <SideOption
             text="Certificates"
-            icon={certificate}
+            Icon={BadgeCheck}
             isActive={activeOption === "Certificates"}
           />
         </Link>
@@ -94,16 +100,15 @@ function StudentSidebar() {
         <Link to="/student/settings">
           <SideOption
             text="Settings"
-            icon={settings}
+            Icon={Settings}
             isActive={activeOption === "Settings"}
           />
         </Link>
 
-        <Link to="/login">
-          <button className="bg-red-500 hover:bg-red-600 cursor-pointer text-white font-medium py-2 px-4 rounded-full shadow-md transition duration-200 ease-in-out">
-            Sign out
-          </button>
-        </Link>
+        {/* Logout */}
+        {/* <div className="mt-auto pt-6 border-t w-4/5 border-gray-700">
+          <LogOutButton />
+        </div> */}
       </div>
     </div>
   );

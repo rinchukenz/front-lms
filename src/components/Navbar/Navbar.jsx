@@ -1,13 +1,21 @@
-import React, { useState } from "react";
-import bell from "../../assets/bell.svg";
-import user from "../../assets/user.svg";
-import menu from "../../assets/menuIcon.svg";
-import Sidebar from "../Sidebar/Sidebar";
+import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import Sidebar from "../Sidebar/Sidebar";
+import { Bell, User, Menu } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+import LogOutButton from "../LogOutButton";
 
 function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const location = useLocation();
+  const { studentAuth, auth } = useAuth();
+
+  // Replace this with actual user data from context or props
+  //const email = "student@example.com";
+
+  console.log(auth);
 
   const getHeaderTitle = () => {
     if (location.pathname.includes("/student/courses")) return "Courses";
@@ -24,7 +32,8 @@ function Navbar() {
     if (location.pathname.includes("grades")) return "Grades";
     if (location.pathname.includes("schedule")) return "Schedule";
     if (location.pathname.includes("admin-requests")) return "Admin Requests";
-    if (location.pathname.includes("admin-management")) return "Admin Management";
+    if (location.pathname.includes("admin-management"))
+      return "Admin Management";
     if (location.pathname.includes("org-admins")) return "Organization Admins";
     if (location.pathname.includes("organizations")) return "Organizations";
     if (location.pathname.includes("/leaderboard")) return "Leaderboard";
@@ -42,37 +51,92 @@ function Navbar() {
     return "";
   };
 
-  const headerTitle = getHeaderTitle();
+  const handleSignOut = () => {
+    console.log("Signing out...");
+    // Clear localStorage, tokens, etc.
+  };
+
+  const handleResetPassword = () => {
+    console.log("Reset Password clicked");
+    // Open modal or navigate
+  };
+
+  const handleViewProfile = () => {
+    console.log("View Profile clicked");
+    // Navigate or show profile modal
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const role = auth?.role || studentAuth?.role || "USER";
+  console.log(role);
 
   return (
-    <div className="h-16 sm:h-20 px-4 sm:px-6 md:px-8 lg:px-10 bg-white flex items-center justify-between">
-      {/* Title */}
-      <h1 className="text-xl sm:text-2xl font-semibold text-black">
-        {headerTitle}
+    <div className="h-16 sm:h-20 px-4 sm:px-6 md:px-8 lg:px-10 bg-white flex items-center justify-between relative">
+      {/* Page Title */}
+      <h1 className="text-xl sm:text-3xl font-semibold text-gray-800">
+        {getHeaderTitle()}
       </h1>
 
-      {/* Sidebar (hidden) */}
+      {/* Sidebar for mobile */}
       <Sidebar isOpen={sidebarOpen} />
 
-      {/* Icons */}
-      <div className="flex items-center gap-4">
-        <img
-          src={bell}
-          className="w-6 h-6 p-1 hidden md:block hover:bg-purple-100 rounded-full cursor-pointer transition"
-          alt="Notifications"
-        />
-        <img
-          src={user}
-          className="w-6 h-6 p-1 hidden md:block hover:bg-purple-100 rounded-full cursor-pointer transition"
-          alt="Profile"
-        />
-        {/* Mobile menu icon */}
-        <button onClick={() => setSidebarOpen(!sidebarOpen)} className="md:hidden">
-          <img
-            src={menu}
-            alt="Menu"
-            className="w-6 h-6 cursor-pointer"
+      {/* Right side icons */}
+      <div className="flex items-center gap-4 relative">
+        {/* Profile Icon + Dropdown */}
+        <div className="relative" ref={dropdownRef}>
+          <User
+            className="w-6 h-6 text-gray-700 hidden md:block hover:text-violet-600 cursor-pointer transition"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
           />
+          {dropdownOpen && (
+            <div className="absolute right-0 mt-2 w-60 bg-white rounded-xl shadow-lg border z-50 p-4 space-y-2">
+              <div className="text-sm mb-2 font-semibold text-black">
+                {studentAuth.email || auth.user}
+              </div>
+              {role !== "ORG_ADMIN" && (
+                <button
+                  onClick={handleViewProfile}
+                  className="w-full text-left hover:bg-violet-500 hover:text-white px-3 py-2 rounded-md text-sm text-gray-800 transition"
+                >
+                  👤 View Profile
+                </button>
+              )}
+              {role !== "ORG_ADMIN" && (
+                <button
+                  onClick={handleResetPassword}
+                  className="w-full text-left hover:bg-violet-500 hover:text-white cursor-pointer px-3 py-2 rounded-md text-sm text-gray-800 transition"
+                >
+                  🔒 Reset Password
+                </button>
+              )}
+
+              {/* <button
+                onClick={handleSignOut}
+                className="w-full text-left hover:bg-red-100 cursor-pointer px-3 py-2 rounded-md text-sm text-red-600 font-semibold transition"
+              >
+                🚪 Sign Out
+              </button> */}
+              <LogOutButton />
+            </div>
+          )}
+        </div>
+
+        {/* Mobile Sidebar Trigger */}
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="md:hidden"
+        >
+          <Menu className="w-6 h-6 text-gray-700 hover:text-violet-600 transition" />
         </button>
       </div>
     </div>

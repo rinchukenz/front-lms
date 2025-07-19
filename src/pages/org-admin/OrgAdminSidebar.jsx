@@ -48,7 +48,9 @@ function OrgAdminSidebar() {
   return (
     <div className="h-full w-full flex flex-col items-center py-6 gap-8 bg-[#F9F9F9] border-r border-[#B8B8B8] overflow-y-auto">
       <div className="flex flex-col items-center justify-center gap-2">
-        <h3 className="font-bold text-xl text-black">{auth.organizationName}</h3>
+        <h3 className="font-bold text-xl text-black">
+          {auth.organizationName}
+        </h3>
         <h4>{auth.name}</h4>
       </div>
 
@@ -61,19 +63,19 @@ function OrgAdminSidebar() {
           />
         </Link>
 
-        <Link to="/orgadmin/students">
-          <SideOption
-            text="Students"
-            Icon={MdSchool}
-            isActive={activeOption === "Students"}
-          />
-        </Link>
-
         <Link to="/orgadmin/courses">
           <SideOption
             text="Courses"
             Icon={MdLibraryBooks}
             isActive={activeOption === "Courses"}
+          />
+        </Link>
+
+        <Link to="/orgadmin/students">
+          <SideOption
+            text="Students"
+            Icon={MdSchool}
+            isActive={activeOption === "Students"}
           />
         </Link>
 
@@ -85,7 +87,7 @@ function OrgAdminSidebar() {
           />
         </Link>
 
-        <Link to="/orgadmin/assessments">
+        {/* <Link to="/orgadmin/assessments">
           <SideOption
             text="Assessments"
             Icon={MdAssignment}
@@ -131,12 +133,12 @@ function OrgAdminSidebar() {
             Icon={MdSettings}
             isActive={activeOption === "Settings"}
           />
-        </Link>
+        </Link> */}
 
         {/* Logout */}
-        <div className="mt-auto pt-6 border-t w-4/5 border-gray-700">
+        {/* <div className="mt-auto pt-6 border-t w-4/5 border-gray-700">
           <LogOutButton />
-        </div>
+        </div> */}
       </div>
     </div>
   );

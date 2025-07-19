@@ -23,12 +23,14 @@ function LoginForm() {
         { withCredentials: true }
       );
 
+      //console.log(res.data);
+
       const { token } = res.data;
       const decoded = jwtDecode(token);
       const { role, sub: user, id: adminId, name, organizationId, organizationName } = decoded;
 
       //console.log(token);
-      console.log(decoded);
+      //console.log(decoded);
       //console.log(role, user, name, organizationId, organizationName);
 
       localStorage.setItem("token", token); // ✅ store token
@@ -48,12 +50,12 @@ function LoginForm() {
         case "SUPER_ADMIN":
           navigate("/superadmin");
           break;
-        case "instructor":
-          navigate("/instructor");
-          break;
-        case "student":
-          navigate("/student");
-          break;
+        // case "instructor":
+        //   navigate("/instructor");
+        //   break;
+        // case "USER":
+        //   navigate("/student");
+        //   break;
         case "ORG_ADMIN":
           navigate("/orgadmin");
           break;

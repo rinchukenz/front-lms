@@ -30,8 +30,8 @@ function SuperAdminDashboard() {
   const [activities, setActivities] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [orgCount, setOrgCount] = useState([]);
-  const [pendingRequestsCount, setPendingRequestsCount] = useState([]);
+  const [orgCount, setOrgCount] = useState(0);
+  const [pendingRequestsCount, setPendingRequestsCount] = useState(0);
   const pageSize = 5;
 
   const getActivities = async (pageNum = 0) => {
@@ -49,8 +49,7 @@ function SuperAdminDashboard() {
   const OrganizationCount = async () => {
     try {
       const response = await getTotalOrganizations();
-      setOrgCount(response.data);
-      console.log(orgCount);
+      setOrgCount(response.data.totalOrganizations);
     } catch (error) {
       console.error("Failed to fetch organization count:", error);
       setOrgCount(0);
@@ -60,7 +59,7 @@ function SuperAdminDashboard() {
   const getPendingRequests = async () => {
     try {
       const response = await pendingCount();
-      setPendingRequestsCount(response.data);
+      setPendingRequestsCount(response.data.pendingOrgAdminRequests);
     } catch (error) {
       console.error("Failed to fetch pending requests count:", error);
       setPendingRequestsCount([]);
@@ -91,19 +90,7 @@ function SuperAdminDashboard() {
     return Array.from({ length: end - start }, (_, i) => i + start);
   };
 
-  // const stats = [
-  //   {
-  //     title: "Total Organizations",
-  //     value: orgCount.totalOrganizations,
-  //     className: "bg-gradient-to-b from-[#7022A3] to-[#9D5CFF] text-white",
-  //   },
-  //   { title: "Total Courses", value: 56 },
-  //   {
-  //     title: "Pending Requests",
-  //     value: pendingRequestsCount.pendingOrgAdminRequests,
-  //   },
-  //   { title: "Registered Users", value: 945 },
-  // ];
+ 
 
   const courseData = [
     { name: "Java", students: 300 },
@@ -175,7 +162,7 @@ function SuperAdminDashboard() {
         <div className="bg-[#9D5CFF] text-white p-5 rounded-xl shadow border border-[#999999]">
           <p className="mb-1">Total Organizations</p>
           <p className="text-2xl font-semibold">
-            {orgCount.totalOrganizations}
+            {orgCount}
           </p>
         </div>
 
@@ -189,7 +176,7 @@ function SuperAdminDashboard() {
         <div className="bg-white p-5 rounded-xl shadow border border-[#999999]">
           <p className="text-gray-600 mb-1">Pending Requests</p>
           <p className="text-2xl font-semibold">
-            {pendingRequestsCount.pendingOrgAdminRequests}
+            {pendingRequestsCount}
           </p>
           <div className="flex justify-end">
             <span

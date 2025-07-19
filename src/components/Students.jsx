@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import StudentCard from "./StudentCard";
 
 const sampleStudents = [
   {
@@ -123,6 +124,7 @@ const sampleStudents = [
 
 function Students() {
   const [search, setSearch] = useState("");
+  const [viewMode, setViewMode] = useState("grid");
 
   const filteredStudents = sampleStudents.filter(
     (student) =>
@@ -146,56 +148,80 @@ function Students() {
           onChange={(e) => setSearch(e.target.value)}
           className="border border-gray-300 px-4 py-2 rounded-lg w-64"
         />
-        <button className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-black">
+        {/* <button className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-black">
           Filter
-        </button>
+        </button> */}
       </div>
 
-      {/* Student Cards */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredStudents.map((student, idx) => (
-          <div
-            key={idx}
-            className="bg-white border rounded-xl p-5 shadow-sm hover:shadow-md transition"
+      {/* View mode toggle */}
+      <div className="mb-6 flex items-center gap-4">
+        <span className="font-medium text-gray-700">View Mode:</span>
+        <div className="inline-flex border border-gray-300 rounded-lg overflow-hidden">
+          <button
+            onClick={() => setViewMode("grid")}
+            className={`px-4 py-2 text-sm font-medium ${
+              viewMode === "grid"
+                ? "bg-violet-600 text-white"
+                : "bg-white text-gray-700 hover:bg-gray-100"
+            }`}
           >
-            {/* User Info */}
-            <div className="mb-3">
-              <h3 className="font-semibold text-base">{student.name}</h3>
-              <p className="text-sm text-gray-600">{student.email}</p>
-              <p className="text-sm text-gray-500">
-                Joined on {student.joined}
-              </p>
-              <span className="inline-block mt-2 text-xs text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
-                {student.status}
-              </span>
-            </div>
-
-            {/* Group Info */}
-            <p className="italic text-gray-500 mb-2">Group: {student.groups}</p>
-
-            {/* Activity Info */}
-            <div className="mb-4">
-              <p>{student.activity}</p>
-              <p className="italic text-gray-500 text-sm">{student.bundle}</p>
-              <Link to={`/orgadmin/students/${student.idx}`}>
-                <button className="mt-2 text-xs text-blue-600 hover:underline">
-                  Open detailed activity
-                </button>
-              </Link>
-            </div>
-
-            {/* Actions */}
-            <div className="flex flex-col gap-2">
-              <button className="text-xs bg-white border border-gray-300 rounded px-3 py-1 hover:bg-gray-100">
-                Modify email
-              </button>
-              <button className="text-xs bg-white border border-red-400 text-red-600 rounded px-3 py-1 hover:bg-red-50">
-                Delete user
-              </button>
-            </div>
-          </div>
-        ))}
+            Grid
+          </button>
+          <button
+            onClick={() => setViewMode("table")}
+            className={`px-4 py-2 text-sm font-medium ${
+              viewMode === "table"
+                ? "bg-violet-600 text-white"
+                : "bg-white text-gray-700 hover:bg-gray-100"
+            }`}
+          >
+            Table
+          </button>
+        </div>
       </div>
+
+      {/* Students */}
+
+      {viewMode === "grid" ? (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredStudents.map((student, idx) => (
+            <StudentCard key={idx} student={student} index={idx} />
+          ))}
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm border border-gray-300">
+            <thead>
+              <tr className="bg-gray-100 text-left">
+                <th className="p-3 border-b">Name</th>
+                <th className="p-3 border-b">Email</th>
+                <th className="p-3 border-b">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredStudents.map((student, idx) => (
+                <tr key={idx} className="border-t">
+                  <td className="p-3">{student.name}</td>
+                  <td className="p-3">{student.email}</td>
+                  <td className="p-3 space-x-2">
+                    <Link to={`/orgadmin/students/${idx}`}>
+                      <button className="text-xs text-blue-600 hover:underline">
+                        View Activity
+                      </button>
+                    </Link>
+                    <button className="text-xs text-gray-700 border border-gray-300 rounded px-2 py-1 hover:bg-gray-100">
+                      Modify Email
+                    </button>
+                    <button className="text-xs text-red-600 border border-red-400 rounded px-2 py-1 hover:bg-red-50">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
