@@ -52,6 +52,8 @@ function App() {
             <Route index element={<StudentDashboard />} />
             <Route path="assignments" element={<Assingments />} />
             <Route path="exams" element={<ComingSoon />} />
+            <Route path="courses" element={<ComingSoon />} />
+            <Route path="profile" element={<ComingSoon />} />
             <Route path="calendar" element={<ComingSoon />} />
             <Route path="announcement" element={<ComingSoon />} />
             <Route path="certificates" element={<ComingSoon />} />

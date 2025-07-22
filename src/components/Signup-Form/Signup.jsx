@@ -9,8 +9,12 @@ import google from "../../assets/google.png";
 import loginImage from "../../assets/loginbg.jpg";
 import back from "../../assets/backbutton.png";
 import { toast } from "react-toastify";
+import Select from "react-select";
+import { countryCodes } from "../../assets/countrycode";
 
 function Signup() {
+ 
+
   const [otp, setOtp] = useState("");
   const [otpSend, setOtpSend] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
@@ -19,6 +23,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [mobile, setMobile] = useState("");
+  const [countryCode, setCountryCode] = useState("+91");
 
   //console.log(user);
 
@@ -27,7 +32,7 @@ function Signup() {
   const handleOtpSend = async () => {
     try {
       await axios.post("http://localhost:8080/api/users/request-otp", {
-        mobile,
+        mobile: countryCode + mobile,
       });
       setOtpSend(true);
       toast.success("OTP send successfully");
@@ -126,45 +131,67 @@ function Signup() {
       {/* OTP Container */}
       {!otpVerified && (
         <div className="w-full lg:w-1/2 bg-white p-6 space-y-5 my-auto">
-          <h2 className="text-2xl font-bold text-gray-800 text-center">
-            OTP Verification
-          </h2>
-          <p className="text-sm text-gray-500 text-center">
-            Enter your registered mobile number to receive a one-time password.
-          </p>
+          <div className="w-2/3 mx-auto space-y-4">
+            <h2 className="text-2xl font-bold text-gray-800 text-center">
+              OTP Verification
+            </h2>
+            <p className="text-sm text-gray-500 text-center">
+              Enter your registered mobile number to receive a one-time
+              password.
+            </p>
 
-          <div className="space-y-4">
-            <CustomInput
-              label="Mobile Number"
-              type="tel"
-              placeholder="Enter your mobile number"
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
-            />
-
-            {otpSend && (
-              <div className="space-y-4">
-                <CustomInput
-                  label="OTP Number"
-                  type="text"
-                  placeholder="Enter the OTP"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
+            <div className="space-y-4">
+              <div className="flex gap-2">
+                <div className="w-1/3">
+                  <Select
+                    options={countryCodes}
+                    value={countryCodes.find((c) => c.value === countryCode)}
+                    onChange={(selected) => setCountryCode(selected.value)}
+                    className="text-xs"
+                    styles={{
+                      control: (base) => ({
+                        ...base,
+                        padding: "2px",
+                        borderRadius: "0.375rem",
+                        borderColor: "#d1d5db", // Tailwind border-gray-300
+                      }),
+                    }}
+                    isSearchable
+                  />
+                </div>
+                <input
+                  type="tel"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                  className="w-2/3 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-violet-300"
+                  placeholder="Enter mobile number"
                 />
               </div>
-            )}
 
-            <CustomButton
-              text={otpSend ? "Verify OTP" : "Send OTP"}
-              action={otpSend ? handleOtpVerify : handleOtpSend}
-              className="w-full bg-gradient-to-r cursor-pointer from-violet-600 to-violet-500 hover:from-violet-500 hover:to-violet-600 text-white py-3 rounded-xl font-semibold transition shadow-md hover:shadow-lg"
-            />
-          </div>
+              {otpSend && (
+                <div className="space-y-4">
+                  <CustomInput
+                    label="OTP Number"
+                    type="text"
+                    placeholder="Enter the OTP"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                  />
+                </div>
+              )}
 
-          <div className="text-center text-sm text-gray-400">
-            {otpSend
-              ? "Didn't receive the OTP?"
-              : "We’ll send you a 6-digit code."}
+              <CustomButton
+                text={otpSend ? "Verify OTP" : "Send OTP"}
+                action={otpSend ? handleOtpVerify : handleOtpSend}
+                className="w-full bg-gradient-to-r cursor-pointer from-violet-600 to-violet-500 hover:from-violet-500 hover:to-violet-600 text-white py-3 rounded-xl font-semibold transition shadow-md hover:shadow-lg"
+              />
+            </div>
+
+            <div className="text-center text-sm text-gray-400">
+              {otpSend
+                ? "Didn't receive the OTP?"
+                : "We’ll send you a 6-digit code."}
+            </div>
           </div>
         </div>
       )}
@@ -210,14 +237,16 @@ function Signup() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <CustomInput
+            {/* <CustomInput
               label="Phone Number"
               type="tel"
               placeholder="Enter your mobile number"
               value={mobile}
               onChange={(e) => setMobile(e.target.value)}
-            />
+            /> */}
           </form>
+
+          <span className="text-green-400">✅ mobile number verified</span>
 
           <div className="flex flex-col items-center gap-2 mt-6">
             <CustomButton

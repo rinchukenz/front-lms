@@ -1,9 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
 import { Bell, User, Menu } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import LogOutButton from "../LogOutButton";
+import CustomInput from "../CustomInput.jsx/CustomInput";
+import CustomButton from "../CustomButton/CustomButton";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -11,11 +15,18 @@ function Navbar() {
   const dropdownRef = useRef(null);
   const location = useLocation();
   const { studentAuth, auth } = useAuth();
+  const [showModal, setShowModal] = useState(false);
+  const [mobile, setMobile] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [otp, setOtp] = useState("");
+  const [otpSend, setOtpSend] = useState(false);
+
+  const navigate = useNavigate();
 
   // Replace this with actual user data from context or props
   //const email = "student@example.com";
 
-  console.log(auth);
+  //console.log(auth);
 
   const getHeaderTitle = () => {
     if (location.pathname.includes("/student/courses")) return "Courses";
@@ -51,19 +62,37 @@ function Navbar() {
     return "";
   };
 
-  const handleSignOut = () => {
-    console.log("Signing out...");
-    // Clear localStorage, tokens, etc.
+  const handleOtpSend = async () => {
+    try {
+      await axios.post("http://localhost:8080/api/users/request-reset-otp", {
+        mobile,
+      });
+      console.log("OTP SEND");
+      setOtpSend(true);
+      toast.success("OTP send successfully");
+    } catch (err) {
+      console.error("Error sending OTP:", err.response?.data || err.message);
+      toast.warning(err.response?.data?.message || "OTP not sent");
+    }
   };
 
-  const handleResetPassword = () => {
-    console.log("Reset Password clicked");
-    // Open modal or navigate
+  const handleOtpVerify = async () => {
+    try {
+      await axios.post("http://localhost:8080/api/users/reset-password", {
+        mobile,
+        otp,
+        newPassword,
+      });
+      //setOtpSend(false);
+      setShowModal(false);
+      toast.success("Password changed successfully");
+    } catch (err) {
+      toast.warning("Failed to change password");
+    }
   };
 
   const handleViewProfile = () => {
-    console.log("View Profile clicked");
-    // Navigate or show profile modal
+    navigate("/student/profile");
   };
 
   // Close dropdown when clicking outside
@@ -113,7 +142,7 @@ function Navbar() {
               )}
               {role !== "ORG_ADMIN" && (
                 <button
-                  onClick={handleResetPassword}
+                  onClick={() => setShowModal(true)}
                   className="w-full text-left hover:bg-violet-500 hover:text-white cursor-pointer px-3 py-2 rounded-md text-sm text-gray-800 transition"
                 >
                   🔒 Reset Password
@@ -139,6 +168,72 @@ function Navbar() {
           <Menu className="w-6 h-6 text-gray-700 hover:text-violet-600 transition" />
         </button>
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/30">
+          <div className="bg-white relative rounded-2xl p-8 w-full max-w-md shadow-xl border border-gray-200 space-y-6">
+            {/* Close Button */}
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-violet-500 font-bold text-lg"
+              aria-label="Close Modal"
+            >
+              X
+            </button>
+
+            {/* Title */}
+            <h2 className="text-2xl font-bold text-gray-800 text-center">
+              Reset Your Password
+            </h2>
+            <p className="text-sm text-gray-500 text-center">
+              Enter your registered mobile number to receive an OTP.
+            </p>
+
+            {/* Phone Number Input */}
+            <CustomInput
+              label="Phone Number"
+              type="tel"
+              placeholder="Enter your number here"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
+            />
+
+            {/* OTP + New Password Inputs */}
+            {otpSend && (
+              <div className="space-y-4">
+                <CustomInput
+                  label="New Password"
+                  type="password"
+                  placeholder="***********"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+                <CustomInput
+                  label="OTP Number"
+                  type="text"
+                  placeholder="Enter the OTP"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+              </div>
+            )}
+
+            {/* Submit Button */}
+            <CustomButton
+              text={otpSend ? "Verify OTP & Reset" : "Send OTP"}
+              action={otpSend ? handleOtpVerify : handleOtpSend}
+              className="w-full bg-gradient-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600 text-white py-3 rounded-xl font-semibold transition shadow-md hover:shadow-lg"
+            />
+
+            {/* Helper Text */}
+            <p className="text-center text-sm text-gray-400">
+              {otpSend
+                ? "Didn't receive the OTP?"
+                : "We'll send you a 6-digit code to reset your password."}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

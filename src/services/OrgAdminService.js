@@ -327,6 +327,16 @@ export const getContents = (cId) => {
   });
 }
 
+export const getContentsBySectionId = (sId) => {
+  return axios.get(`${REST_API_BASE_URL}/api/contents/section/${sId}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`
+    }
+  });
+}
+
+
+
 export const deleteContent = (contentId) => {
   return axios.delete(`${REST_API_BASE_URL}/api/contents/${contentId}`, {
     headers: {

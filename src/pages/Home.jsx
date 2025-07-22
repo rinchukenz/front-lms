@@ -1,8 +1,8 @@
 import React from "react";
 import Dashboard from "../components/Dashboard/Dashboard";
 import WebSidebar from "../components/WebSidebar/WebSidebar";
-import Navbar from "../components/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
 
 
 function Home() {
