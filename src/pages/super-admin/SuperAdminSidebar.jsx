@@ -1,5 +1,5 @@
 import React from "react";
-import SideOption from "../../components/SideOption/SideOption";
+// import SideOption from "../../components/SideOption/SideOption";
 import { Link, useLocation } from "react-router-dom";
 import dashboard from "../../assets/dashboard.svg";
 import book from "../../assets/book-solid.svg";
@@ -9,7 +9,8 @@ import exam from "../../assets/exam.svg";
 import certificate from "../../assets/certificate.svg";
 import settings from "../../assets/settings.svg";
 import speaker from "../../assets/speaker.svg";
-import LogOutButton from "../../components/LogOutButton";
+// import LogOutButton from "../../components/LogOutButton";
+import SideOption from "../../components/common-components/SideOption";
 
 function SuperAdminSidebar() {
   const location = useLocation();

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import CustomButton from "../components/CustomButton/CustomButton";
+// import CustomButton from "../components/CustomButton/CustomButton";
 import shuttle from "../assets/shuttle.png";
 import background from "../assets/opening-bg.png";
 import { useNavigate } from "react-router-dom";

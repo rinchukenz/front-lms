@@ -3,9 +3,9 @@ import OpeningScreen from "./pages/OpeningScreen";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
 import Home from "./pages/Home";
-import Dashboard from "./components/Dashboard/Dashboard";
-import Courses from "./components/Courses/Courses";
-import Assingments from "./components/Assingments";
+// import Dashboard from "./components/Dashboard/Dashboard";
+import Courses from "./components/orgadmin-components/Courses";
+import Assingments from "./components/student-components/Assingments";
 import StudentHome from "./pages/student/StudentHome";
 import StudentDashboard from "./pages/student/StudentDashboard";
 import SuperAdminHome from "./pages/super-admin/SuperAdminHome";
@@ -14,28 +14,37 @@ import OrgAdminHome from "./pages/org-admin/OrgAdminHome";
 import OrgAdminDashboard from "./pages/org-admin/OrgAdminDashboard";
 import InstructorHome from "./pages/instructor/InstructorHome";
 import InstructorDashboard from "./pages/instructor/InstructorDashboard";
-import ComingSoon from "./components/ComingSoon";
-import Organizations from "./components/Organizations";
+import ComingSoon from "./components/common-components/ComingSoon";
+import Organizations from "./components/superadmin-components/Organizations";
 import ProtectedRoute from "./components/ProtectedRoute";
-import AdminRequests from "./components/AdminRequests";
-import OrgAdmins from "./components/AdminRequests";
-import AdminManagement from "./components/AdminManagement";
-import Orgs from "./components/Orgs";
-import AddOrg from "./components/AddOrg";
-import AdminReg from "./components/AdminReg";
+import AdminRequests from "./components/superadmin-components/AdminRequests";
+import OrgAdmins from "./components/superadmin-components/AdminRequests";
+import AdminManagement from "./components/superadmin-components/AdminManagement";
+//import Orgs from "./components/Orgs";
+// import AddOrg from "./components/AddOrg";
+// import AdminReg from "./components/AdminReg";
 import { ToastContainer } from "react-toastify";
-import AdminBulkRegistration from "./components/AdminBulkRegistration";
-import Students from "./components/Students";
-import StudentData from "./components/StudentData";
-import Leaderboard from "./components/Leaderboard";
-import CourseData from "./components/CourseData";
-import AddContent from "./components/AddContent";
-import AddCourse from "./components/AddCourse";
-import CoursePage from "./components/CoursePage";
-import CourseModules from "./components/CourseModules";
-import CourseSyllabus from "./components/CourseSyllabus";
-import StudentLogin from "./components/StudentLogin";
+import AdminBulkRegistration from "./components/superadmin-components/AdminBulkRegistration";
+import Students from "./components/orgadmin-components/Students";
+//import StudentData from "./components/orgadmin-components/StudentData";
+import Leaderboard from "./components/student-components/Leaderboard";
+import CourseData from "./components/orgadmin-components/CourseData";
+// import AddContent from "./components/AddContent";
+// import AddCourse from "./components/AddCourse";
+import CoursePage from "./components/orgadmin-components/CoursePage";
+import CourseModules from "./components/orgadmin-components/CourseModules";
+// import CourseSyllabus from "./components/CourseSyllabus";
+// import StudentLogin from "./components/StudentLogin";
 import SuperAdminCourses from "./pages/super-admin/SuperAdminCourses";
+import VideoLibrary from "./components/student-components/VideoLibrary";
+import StudentData from "./components/student-components/StudentData";
+import AddContent from "./components/orgadmin-components/AddContent";
+import AddCourse from "./components/orgadmin-components/AddCourse";
+import AddOrg from "./components/superadmin-components/AddOrg";
+import AdminReg from "./components/superadmin-components/AdminReg";
+import Orgs from "./components/superadmin-components/Orgs";
+import CourseSyllabus from "./components/orgadmin-components/CourseSyllabus";
+import StudentLogin from "./components/Login-Form/StudentLogin";
 
 function App() {
   return (
@@ -55,7 +64,7 @@ function App() {
             <Route path="courses" element={<ComingSoon />} />
             <Route path="profile" element={<ComingSoon />} />
             <Route path="calendar" element={<ComingSoon />} />
-            <Route path="announcement" element={<ComingSoon />} />
+            <Route path="resume-builder" element={<ComingSoon />} />
             <Route path="certificates" element={<ComingSoon />} />
             <Route path="settings" element={<ComingSoon />} />
           </Route>
@@ -92,8 +101,8 @@ function App() {
             <Route path="update-course/:cId" element={<AddCourse />} />
             <Route path="courses/:cId/add-content" element={<AddContent />} />
             <Route path="courses/:cId/syllabus" element={<CourseSyllabus />} />
-            <Route path="assessments" element={<ComingSoon />} />
-            <Route path="live-class" element={<ComingSoon />} />
+            <Route path="exams" element={<ComingSoon />} />
+            <Route path="video-library" element={<VideoLibrary />} />
             <Route path="certificates" element={<ComingSoon />} />
             <Route path="support" element={<ComingSoon />} />
             <Route path="analytics" element={<ComingSoon />} />

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import SideOption from "../../components/SideOption/SideOption";
-import LogOutButton from "../../components/LogOutButton";
+import SideOption from "../../components/common-components/SideOption";
+// import LogOutButton from "../../components/LogOutButton";
 
 import {
   LayoutDashboard,
@@ -11,7 +11,13 @@ import {
   CalendarDays,
   BadgeCheck,
   Settings,
-  Megaphone,
+  Mic,
+  Users,
+  Target,
+  Code,
+  FilePlus2,
+  Archive,
+  Briefcase,
 } from "lucide-react";
 
 function StudentSidebar() {
@@ -22,9 +28,14 @@ function StudentSidebar() {
     if (location.pathname.includes("courses")) return "Courses";
     if (location.pathname.includes("assignments")) return "Assignments";
     if (location.pathname.includes("exams")) return "Exams";
-    if (location.pathname.includes("calendar")) return "Calendar";
-    if (location.pathname.includes("announcement")) return "Announcement";
+    if (location.pathname.includes("interviews")) return "AI Mock Interviews";
+    if (location.pathname.includes("community")) return "Community";
+    if (location.pathname.includes("interview-prep")) return "Interview Preparation";
+    if (location.pathname.includes("coding-lab")) return "Coding Lab";
+    if (location.pathname.includes("resume-builder")) return "Resume Builder";
+    if (location.pathname.includes("paper-bank")) return "MAANG+MNC Paper Bank";
     if (location.pathname.includes("certificates")) return "Certificates";
+    if (location.pathname.includes("jobs")) return "Jobs";
     if (location.pathname.includes("settings")) return "Settings";
     return "";
   };
@@ -35,8 +46,7 @@ function StudentSidebar() {
     <div className="h-full w-full flex flex-col items-center py-6 gap-8 bg-[#F9F9F9] border-r border-[#B8B8B8] overflow-y-auto">
       {/* Header */}
       <div className="flex flex-col items-center justify-center gap-2">
-        <h3 className="font-bold text-xl text-black">Student Panel</h3>
-        <h4 className="text-sm text-gray-700">LMS Portal</h4>
+        <h3 className="font-bold text-lg text-black">Organization Name</h3>
       </div>
 
       {/* Sidebar Options */}
@@ -73,19 +83,51 @@ function StudentSidebar() {
           />
         </Link>
 
-        <Link to="/student/calendar">
+        <Link to="/student/interviews">
           <SideOption
-            text="Calendar"
-            Icon={CalendarDays}
-            isActive={activeOption === "Calendar"}
+            text="AI Mock Interviews"
+            Icon={Mic}
+            isActive={activeOption === "AI Mock Interviews"}
           />
         </Link>
 
-        <Link to="/student/announcement">
+        <Link to="/student/community">
           <SideOption
-            text="Announcement"
-            Icon={Megaphone}
-            isActive={activeOption === "Announcement"}
+            text="Community"
+            Icon={Users}
+            isActive={activeOption === "Community"}
+          />
+        </Link>
+
+        <Link to="/student/interview-prep">
+          <SideOption
+            text="Interview Preparation"
+            Icon={Target}
+            isActive={activeOption === "Interview Preparation"}
+          />
+        </Link>
+
+        <Link to="/student/coding-lab">
+          <SideOption
+            text="Coding Lab"
+            Icon={Code}
+            isActive={activeOption === "Coding Lab"}
+          />
+        </Link>
+
+        <Link to="/student/resume-builder">
+          <SideOption
+            text="Resume Builder"
+            Icon={FilePlus2}
+            isActive={activeOption === "Resume Builder"}
+          />
+        </Link>
+
+        <Link to="/student/paper-bank">
+          <SideOption
+            text="MAANG+MNC Paper Bank"
+            Icon={Archive}
+            isActive={activeOption === "MAANG+MNC Paper Bank"}
           />
         </Link>
 
@@ -97,18 +139,20 @@ function StudentSidebar() {
           />
         </Link>
 
-        <Link to="/student/settings">
+        <Link to="/student/jobs">
           <SideOption
-            text="Settings"
-            Icon={Settings}
-            isActive={activeOption === "Settings"}
+            text="Jobs"
+            Icon={Briefcase}
+            isActive={activeOption === "Jobs"}
           />
         </Link>
 
-        {/* Logout */}
-        {/* <div className="mt-auto pt-6 border-t w-4/5 border-gray-700">
+        {/* Uncomment if using logout */}
+        {/* 
+        <div className="mt-auto pt-6 border-t w-4/5 border-gray-700">
           <LogOutButton />
-        </div> */}
+        </div> 
+        */}
       </div>
     </div>
   );

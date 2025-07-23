@@ -1,5 +1,5 @@
 import React from "react";
-import SideOption from "../SideOption/SideOption";
+// import SideOption from "../SideOption/SideOption";
 import { Link, useLocation } from "react-router-dom";
 import dashboard from "../../assets/dashboard.svg";
 import book from "../../assets/book-solid.svg";
@@ -10,6 +10,7 @@ import skyllx from "../../assets/skyllx.png";
 import certificate from "../../assets/certificate.svg";
 import settings from "../../assets/settings.svg";
 import speaker from "../../assets/speaker.svg";
+import SideOption from "../common-components/SideOption";
 
 function WebSidebar() {
   const location = useLocation();

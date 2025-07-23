@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import LoginForm from "../components/Login-Form/LoginForm";
 import Login from "../components/Login-Form/Login";
-import StudentLogin from "../components/StudentLogin";
+//import StudentLogin from "../components/StudentLogin";
 import loginImage from "../assets/loginbg.jpg";
 import back from "../assets/backbutton.png";
+import StudentLogin from "../components/Login-Form/StudentLogin";
 
 function LoginPage() {
   const [loginType, setLoginType] = useState("USER");

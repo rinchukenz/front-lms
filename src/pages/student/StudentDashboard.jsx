@@ -1,9 +1,10 @@
 import React from "react";
-import CalendarCarousel from "../../components/Calender/CalendarCarousel";
-import ProgressTracking from "../../components/ProgressTracking/ProgressTracking";
+import CalendarCarousel from "../../components/student-components/CalendarCarousel";
+
 import profileImage from "../../assets/propicture.jpeg";
 import { useAuth } from "../../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
+import ProgressTracking from "../../components/student-components/ProgressTracking";
 
 function StudentDashboard() {
   const { studentAuth } = useAuth();
@@ -27,7 +28,7 @@ function StudentDashboard() {
           <h3 className="font-semibold font-sans text-2xl sm:text-5xl">
             Welcome back,
           </h3>
-          <h3 className="font-sans font-semibold text-3xl sm:text-6xl py-1 sm:py-2 text-center bg-gradient-to-r from-violet-500 to-pink-400 text-transparent bg-clip-text">
+          <h3 className="font-sans font-semibold text-3xl sm:text-6xl py-1 sm:py-2 text-center bg-gradient-to-r from-[#9D5CFF] to-[#9D5CFF] text-transparent bg-clip-text">
             {studentAuth.name?.split(" ")[0]}
           </h3>
         </div>

@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
-import CustomInput from "../CustomInput.jsx/CustomInput";
-import CustomButton from "../CustomButton/CustomButton";
+// import CustomInput from "../CustomInput.jsx/CustomInput";
+// import CustomButton from "../CustomButton/CustomButton";
 import google from "../../assets/google.png";
 import loginImage from "../../assets/loginbg.jpg";
 import back from "../../assets/backbutton.png";
+import CustomInput from "../common-components/CustomInput";
+import CustomButton from "../common-components/CustomButton";
 
 function Login() {
   const [email, setEmail] = useState("");

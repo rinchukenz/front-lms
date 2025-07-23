@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import SideOption from "../../components/SideOption/SideOption";
+// import SideOption from "../../components/SideOption/SideOption";
 import skyllx from "../../assets/skyllx.png";
-import LogOutButton from "../../components/LogOutButton";
+// import LogOutButton from "../../components/LogOutButton";
 import {
   MdDashboard,
   MdGroups,
@@ -18,6 +18,7 @@ import {
   MdLogout,
 } from "react-icons/md";
 import { useAuth } from "../../context/AuthContext";
+import SideOption from "../../components/common-components/SideOption";
 
 function OrgAdminSidebar() {
   const location = useLocation();
@@ -31,9 +32,9 @@ function OrgAdminSidebar() {
   const getActiveOption = () => {
     if (location.pathname.includes("/leaderboard")) return "Leaderboard";
     if (location.pathname === "/orgadmin") return "Dashboard";
-    if (location.pathname.includes("/assessments")) return "Assessments";
+    if (location.pathname.includes("/exams")) return "Exams";
     if (location.pathname.includes("/students")) return "Students";
-    if (location.pathname.includes("/live-class")) return "Live Class";
+    if (location.pathname.includes("/video-library")) return "Video Library";
     if (location.pathname.includes("/transactions")) return "Transactions";
     if (location.pathname.includes("/courses")) return "Courses";
     if (location.pathname.includes("/certificates")) return "Certificates";
@@ -87,21 +88,22 @@ function OrgAdminSidebar() {
           />
         </Link>
 
-        {/* <Link to="/orgadmin/assessments">
+         <Link to="/orgadmin/exams">
           <SideOption
-            text="Assessments"
+            text="Exams"
             Icon={MdAssignment}
-            isActive={activeOption === "Assessments"}
+            isActive={activeOption === "Exams"}
           />
         </Link>
 
-        <Link to="/orgadmin/live-class">
+        <Link to="/orgadmin/video-library">
           <SideOption
-            text="Live Class"
+            text="Video Library"
             Icon={MdCalendarToday}
-            isActive={activeOption === "Live Class"}
+            isActive={activeOption === "Video Library"}
           />
         </Link>
+{/*
 
         <Link to="/orgadmin/transactions">
           <SideOption
