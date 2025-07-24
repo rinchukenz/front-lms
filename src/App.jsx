@@ -1,8 +1,7 @@
 import LoginPage from "./pages/LoginPage";
-import OpeningScreen from "./pages/OpeningScreen";
+//import OpeningScreen from "./pages/OpeningScreen";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
-import Home from "./pages/Home";
 // import Dashboard from "./components/Dashboard/Dashboard";
 import Courses from "./components/orgadmin-components/Courses";
 import Assingments from "./components/student-components/Assingments";
@@ -16,7 +15,7 @@ import InstructorHome from "./pages/instructor/InstructorHome";
 import InstructorDashboard from "./pages/instructor/InstructorDashboard";
 import ComingSoon from "./components/common-components/ComingSoon";
 import Organizations from "./components/superadmin-components/Organizations";
-import ProtectedRoute from "./components/ProtectedRoute";
+//import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRequests from "./components/superadmin-components/AdminRequests";
 import OrgAdmins from "./components/superadmin-components/AdminRequests";
 import AdminManagement from "./components/superadmin-components/AdminManagement";
@@ -45,12 +44,18 @@ import AdminReg from "./components/superadmin-components/AdminReg";
 import Orgs from "./components/superadmin-components/Orgs";
 import CourseSyllabus from "./components/orgadmin-components/CourseSyllabus";
 import StudentLogin from "./components/Login-Form/StudentLogin";
+import ProtectedRoute from "./components/common-components/ProtectedRoute";
+import OpeningScreen from "./pages/opening-window/OpeningScreen";
+import InterviewPage from "./pages/student/InterviewPage";
+import Home from "./pages/Home";
+import HomeForOrg from "./pages/HomeForOrg";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<OpeningScreen />} />
+        <Route path="/" element={<HomeForOrg />} />
+        <Route path="/open-screen" element={<OpeningScreen />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/login/user" element={<StudentLogin />} />
         <Route path="/signup" element={<SignUpPage />} />
@@ -61,6 +66,7 @@ function App() {
             <Route index element={<StudentDashboard />} />
             <Route path="assignments" element={<Assingments />} />
             <Route path="exams" element={<ComingSoon />} />
+            <Route path="interviews" element={<InterviewPage />} />
             <Route path="courses" element={<ComingSoon />} />
             <Route path="profile" element={<ComingSoon />} />
             <Route path="calendar" element={<ComingSoon />} />

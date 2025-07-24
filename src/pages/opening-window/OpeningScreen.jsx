@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 // import CustomButton from "../components/CustomButton/CustomButton";
-import shuttle from "../assets/shuttle.png";
-import background from "../assets/opening-bg.png";
+// import shuttle from "../assets/shuttle.png";
 import { useNavigate } from "react-router-dom";
-import pic1 from "../assets/icon1.svg";
-import pic2 from "../assets/icon2.svg";
-import pic3 from "../assets/icon3.svg";
-import pic4 from "../assets/icon4.svg";
-import pic5 from "../assets/icon5.svg";
-import pic6 from "../assets/icon6.svg";
+import pic1 from "../../assets/icon1.svg";
+import pic2 from "../../assets/icon2.svg";
+import pic3 from "../../assets/icon3.svg";
+import pic4 from "../../assets/icon4.svg";
+import pic5 from "../../assets/icon5.svg";
+import pic6 from "../../assets/icon6.svg";
 import GradientButton from "./GradientButton";
 import {
   BookOpen,
@@ -22,7 +21,7 @@ import {
   Target,
   Zap,
 } from "lucide-react";
-import Icon from "../components/Icon";
+import Icon from "./Icon";
 
 function OpeningScreen() {
   const navigate = useNavigate();

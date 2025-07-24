@@ -15,7 +15,7 @@
     "@tailwindcss/vite": "^4.1.8",
     "axios": "^1.10.0",
     "dayjs": "^1.11.13",
-    "framer-motion": "^12.23.6",
+    "framer-motion": "^12.23.9",
     "gsap": "^3.13.0",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.513.0",
@@ -28,7 +28,8 @@
     "react-select": "^5.10.2",
     "react-toastify": "^11.0.5",
     "react-tooltip": "^5.29.1",
-    "recharts": "^2.15.3"
+    "recharts": "^2.15.3",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

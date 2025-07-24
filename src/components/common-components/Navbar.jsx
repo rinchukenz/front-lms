@@ -37,6 +37,7 @@ function Navbar() {
     if (location.pathname.includes("students")) return "Students";
     if (location.pathname.includes("assignments")) return "Assignments";
     if (location.pathname.includes("exams")) return "Exams";
+    if (location.pathname.includes("interviews")) return "AI Mock Interview";
     if (location.pathname.includes("calendar")) return "Calendar";
     if (location.pathname.includes("resume-builder")) return "Resume Builder";
     if (location.pathname.includes("certificates")) return "Certificates";

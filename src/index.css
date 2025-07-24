@@ -7,3 +7,15 @@
   --text-11px: 11px;
   
 }
+
+/* index.css or any global css file */
+.swiper-pagination-bullet {
+  background-color: #e5e7eb; /* Tailwind gray-200 */
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #8b5cf6; /* Tailwind violet-600 */
+}
+
+

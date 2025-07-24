@@ -4,9 +4,11 @@ import Login from "../components/Login-Form/Login";
 import loginImage from "../assets/loginbg.jpg";
 import back from "../assets/backbutton.png";
 import StudentLogin from "../components/Login-Form/StudentLogin";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [loginType, setLoginType] = useState("USER");
+  const navigate = useNavigate();
 
   return (
     <div className="max-h-screen min-h-screen flex flex-col lg:flex-row">
