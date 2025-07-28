@@ -7,7 +7,7 @@ import StudentLogin from "../components/Login-Form/StudentLogin";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [loginType, setLoginType] = useState("USER");
+  // const [loginType, setLoginType] = useState("USER");
   const navigate = useNavigate();
 
   return (
@@ -63,7 +63,7 @@ function LoginPage() {
         </div>
 
         {/* Toggle Button */}
-        <div className="inline-flex items-center w-1/2 border border-violet-600 rounded-md overflow-hidden">
+        {/* <div className="inline-flex items-center w-1/2 border border-violet-600 rounded-md overflow-hidden">
           <button
             onClick={() => setLoginType("ADMIN")}
             className={`w-1/2 py-2 text-sm font-semibold cursor-pointer transition-colors duration-300 ${
@@ -84,7 +84,7 @@ function LoginPage() {
           >
             USER
           </button>
-        </div>
+        </div> */}
 
         {/* ADMIN or USER form */}
         {loginType === "ADMIN" ? <Login /> : <StudentLogin />}

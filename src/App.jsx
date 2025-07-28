@@ -49,15 +49,18 @@ import OpeningScreen from "./pages/opening-window/OpeningScreen";
 import InterviewPage from "./pages/student/InterviewPage";
 import Home from "./pages/Home";
 import HomeForOrg from "./pages/HomeForOrg";
+import LoginStudent from "./components/Login-Form/LoginStudent";
+import LoginAdmin from "./components/Login-Form/LoginAdmin";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomeForOrg />} />
+        <Route path="/orghome" element={<HomeForOrg />} />
+        <Route path="/" element={<Home />} />
         <Route path="/open-screen" element={<OpeningScreen />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/login/user" element={<StudentLogin />} />
+        <Route path="/login/admin" element={<LoginAdmin />} />
+        <Route path="/login/student" element={<LoginStudent />} />
         <Route path="/signup" element={<SignUpPage />} />
 
         {/* Student Routes */}

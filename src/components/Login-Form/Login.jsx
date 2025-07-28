@@ -109,7 +109,7 @@ function Login() {
           action={handleClick}
           className="cursor-pointer w-1/2 bg-violet-500 hover:bg-violet-600 text-white py-3 rounded-lg font-medium transition"
         />
-        <div className="flex w-1/2 items-center gap-2 text-black text-xs mt-2">
+        {/* <div className="flex w-1/2 items-center gap-2 text-black text-xs mt-2">
           <hr className="flex-grow border-gray-200" />
           <span className="font-semibold">or login with</span>
           <hr className="flex-grow border-gray-200" />
@@ -127,7 +127,7 @@ function Login() {
           >
             Sign up
           </span>
-        </p>
+        </p> */}
       </div>
     </div>
   );

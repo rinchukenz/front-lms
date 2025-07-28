@@ -1,7 +1,11 @@
 @import "tailwindcss";
+@import "@fontsource/inter"; /* Defaults to 400 weight */
+@import "@fontsource/ibm-plex-serif";
+
 @theme {
 
-  --font-display: "League Spartan", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-ibm: "IBM Plex Serif", sans-serif;
   --text-xxs: 10px;
   --text-xxxs: 9px;
   --text-11px: 11px;

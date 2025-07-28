@@ -116,7 +116,7 @@ function Signup() {
             Sign up
           </h1>
           <p className="text-white font-semibold text-left font-sans">
-            Create your account to get started with LMS{" "}
+            Create your account to get started with Highrr{" "}
           </p>
         </div>
 
