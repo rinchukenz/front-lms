@@ -72,7 +72,7 @@ function HomeHero() {
 
   return (
     <section
-      className="w-full flex flex-col lg:flex-row-reverse h-screen mt-[80px] px-4 lg:py-15   
+      className="w-full flex flex-col lg:flex-row-reverse mt-[80px] px-4 md:px-auto lg:py-15   
                bg-cover bg-center bg-no-repeat relative"
       style={{
         backgroundImage: `url(${herobg})`,
@@ -96,8 +96,8 @@ function HomeHero() {
       </div>
 
       {/* Text Content */}
-      <div className="w-full lg:w-[60%] px-2 py-15 lg:px-8">
-        <h1 className="text-3xl lg:text-4xl font-ibm font-bold">
+      <div className="w-full lg:w-[60%] px-2 py-15 md:px-8">
+        <h1 className="text-3xl md:text-4xl font-ibm font-bold">
           Empowering Organizations and Students to Learn, Grow, and Lead
         </h1>
         <p className="text-lg md:text-lg mt-6 text-[#414141]">
@@ -133,7 +133,7 @@ function HomeHero() {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10 lg:mt-32 justify-center sm:justify-start">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10 md:mt-15 md:px-auto lg:mt-32  items-center lg:justify-start">
           <button
             onClick={() => navigate("/signup")}
             className="bg-[#9D5CFF] w-full md:w-2/5 cursor-pointer rounded-2xl px-6 py-1.5 text-white font-semibold text-sm"

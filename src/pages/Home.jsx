@@ -1,16 +1,20 @@
-import React from 'react'
-import HomeNavbar from '../components/Home-components/HomeNavbar'
-import HomeHero from '../components/Home-components/HomeHero'
-import VoiceOfOurLeaners from '../components/Home-components/VoiceOfOurLeaners'
-import CareerFeatures from '../components/Home-components/CareerFeatures'
-import AreYouAnOrganization from '../components/Home-components/AreYouAnOrganization'
-import HomeFaqSection from '../components/Home-components/HomeFaqSection'
-import FeaturedCourses from '../components/Home-components/FeaturedCourses'
-import WhatMakesHighrrDifferent from '../components/Home-components/WhatMakesHighrrDifferent'
+import React, { useEffect } from "react";
+import HomeNavbar from "../components/Home-components/HomeNavbar";
+import HomeHero from "../components/Home-components/HomeHero";
+import VoiceOfOurLeaners from "../components/Home-components/VoiceOfOurLeaners";
+import CareerFeatures from "../components/Home-components/CareerFeatures";
+import AreYouAnOrganization from "../components/Home-components/AreYouAnOrganization";
+import HomeFaqSection from "../components/Home-components/HomeFaqSection";
+import FeaturedCourses from "../components/Home-components/FeaturedCourses";
+import WhatMakesHighrrDifferent from "../components/Home-components/WhatMakesHighrrDifferent";
 
 function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className='overflow-x-hidden'>
+    <div className="overflow-x-hidden">
       <HomeNavbar />
       <HomeHero />
       <FeaturedCourses />
@@ -20,7 +24,7 @@ function Home() {
       <AreYouAnOrganization />
       <HomeFaqSection />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

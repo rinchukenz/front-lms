@@ -52,7 +52,7 @@ function LoginPage() {
       <div className="w-full lg:w-1/2 bg-white flex flex-col gap-5 justify-center px-8 sm:px-16 md:px-24 lg:px-32 py-10">
         {/* Welcome Texts */}
         <div className="text-black flex flex-col gap-4 mb-6">
-          <h2 className="text-4xl font-semibold">Welcome Back 👋</h2>
+          <h2 className="text-4xl font-semibold">Welcome Back </h2>
           <p className="text-sm">
             Continue your learning journey with App name LMS.
           </p>

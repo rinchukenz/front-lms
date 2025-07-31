@@ -6,15 +6,14 @@ import { jwtDecode } from "jwt-decode";
 import CustomInput from "../common-components/CustomInput";
 import CustomButton from "../common-components/CustomButton";
 import google from "../../assets/google.png";
-import loginImage from "../../assets/loginbg.jpg";
+import loginImage from "../../assets/login-leftbg.jpg";
+import loginman from "../../assets/login-man.svg";
 import back from "../../assets/backbutton.png";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import { countryCodes } from "../../assets/countrycode";
 
 function Signup() {
- 
-
   const [otp, setOtp] = useState("");
   const [otpSend, setOtpSend] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
@@ -44,7 +43,7 @@ function Signup() {
   const handleOtpVerify = async () => {
     try {
       await axios.post("http://localhost:8080/api/users/verify-otp", {
-        mobile,
+        mobile: countryCode + mobile,
         otp,
       });
       setOtpSend(false);
@@ -108,6 +107,13 @@ function Signup() {
           src={back}
           alt=""
           onClick={() => navigate("/")}
+        />
+
+        {/* man image */}
+        <img
+          className="absolute w-50 h-50 top-45 left-60 cursor-pointer"
+          src={loginman}
+          alt=""
         />
 
         {/* Text */}

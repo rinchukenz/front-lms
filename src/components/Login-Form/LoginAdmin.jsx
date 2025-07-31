@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-//import Login from "../components/Login-Form/Login";
-//import StudentLogin from "../components/StudentLogin";
-import loginImage from "../../assets/loginbg.jpg";
-// import loginImage from "../../"
 import back from "../../assets/backbutton.png";
-// import StudentLogin from "../components/Login-Form/StudentLogin";
 import { useNavigate } from "react-router-dom";
+import loginImage from "../../assets/login-leftbg.jpg";
+import loginman from "../../assets/login-man.svg";
 import Login from "./Login";
 
 function LoginAdmin() {
@@ -32,6 +29,13 @@ function LoginAdmin() {
           onClick={() => navigate("/")}
         />
 
+        {/* man image */}
+        <img
+          className="absolute w-50 h-50 top-45 left-60 cursor-pointer"
+          src={loginman}
+          alt=""
+        />
+
         {/* Text */}
         <div className="flex flex-col w-2/3 gap-3 mx-auto h-full justify-center text-center text-white">
           <h1 className="text-white text-4xl font-sans text-left font-semibold">
@@ -54,7 +58,7 @@ function LoginAdmin() {
       <div className="w-full lg:w-1/2 bg-white flex flex-col gap-5 justify-center px-8 sm:px-16 md:px-24 lg:px-32 py-10">
         {/* Welcome Texts */}
         <div className="text-black flex flex-col gap-4 mb-6">
-          <h2 className="text-4xl font-semibold">Welcome Back 👋</h2>
+          <h2 className="text-4xl font-semibold">Welcome Back Organization Name</h2>
           <p className="text-sm">
             Continue your learning journey with App name LMS.
           </p>

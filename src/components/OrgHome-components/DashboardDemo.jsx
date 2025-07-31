@@ -9,11 +9,11 @@ function DashboardDemo() {
       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-white z-0" />
 
       {/* Centered Image */}
-      <div className="z-10 w-[70%] max-w-[900px] px-4 lg:py-10">
+      <div className="z-10 w-[80%] max-w-[900px] px-4 lg:py-10">
         <img
           src={centerImage}
           alt="Centered"
-          className="w-full h-auto object-contain rounded-xl shadow-md border border-black"
+          className="w-full h-auto object-contain rounded-xl shadow-md border border-[#ABABAB]"
         />
       </div>
     </div>

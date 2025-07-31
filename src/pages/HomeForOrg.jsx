@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
  import HomeNavbarR from "../components/OrgHome-components/HomeNavbarR";
 import HomeHeroR from "../components/OrgHome-components/HomeHeroR";
 import DashboardDemo from "../components/OrgHome-components/DashboardDemo";
@@ -10,6 +10,11 @@ import LaunchLMS from "../components/OrgHome-components/LaunchLMS";
 import FaqSection from "../components/OrgHome-components/FaqSection";
 
 function HomeForOrg() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <HomeNavbarR />

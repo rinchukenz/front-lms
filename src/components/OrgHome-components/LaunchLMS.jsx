@@ -2,7 +2,7 @@ import React from "react";
 
 function LaunchLMS() {
   return (
-    <section className="px-4 py-16 sm:px-8 md:px-16 lg:px-24 bg-white space-y-10">
+    <section className="px-4 py-16 sm:px-8 md:px-15 lg:px-24 bg-white space-y-10">
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-ibm font-semibold mb-10 text-gray-900">
         Launch Your Organization LMS in Days-Not Months
       </h2>

@@ -69,7 +69,7 @@ function EverythingYouNeed() {
   const visibleFeatures = showAll ? features : features.slice(0, 4);
 
   return (
-    <section className="py-12 sm:py-14 md:py-16 lg:py-10 px-6 sm:px-10 md:px-15 lg:px-20 bg-white">
+    <section className="py-12 sm:py-14 md:py-16 lg:py-10 px-6 sm:px-10 md:px-15 lg:px-24 bg-white">
       <h2 className="text-3xl md:text-4xl font-ibm font-semibold mb-10 md:mb-15 lg:mb-20">
         Everything You Need to Teach, Track & Transform{" "}
       </h2>

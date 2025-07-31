@@ -24,7 +24,7 @@ const features = [
 
 function CareerFeatures() {
   return (
-    <section className="bg-[#FDF7FD] py-16 px-4 sm:px-8">
+    <section className="bg-[#FDF7FD] py-16 px-4 sm:px-8 md:px-20">
       <h2 className="text-3xl md:text-4xl font-ibm font-semibold mb-15 text-center">
         Invest in Your Career from Day One
       </h2>

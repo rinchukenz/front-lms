@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
     if (logoutTimeoutRef.current) clearTimeout(logoutTimeoutRef.current);
 
-    navigate("/");
+    //navigate("/");
   };
 
   const scheduleLogout = (exp) => {

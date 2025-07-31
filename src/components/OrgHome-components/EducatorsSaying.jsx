@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Testimonials Data
 const testimonials = [
   {
     quote:
@@ -15,14 +14,49 @@ const testimonials = [
       "This platform helped our teachers deliver more personalized learning. The AI-powered labs are intuitive and effective.",
     name: "Sara Lee, Director",
     role: "Bright Minds Academy",
-    image: "https://i.pravatar.cc/100?img=2",
+    image: "https://i.pravatar.cc/100?img=10",
   },
   {
     quote:
       "Students are loving the interactive assessments. It gives them a real-world feel even before they graduate.",
     name: "Michael Chan, Principal",
     role: "NextGen High School",
-    image: "https://i.pravatar.cc/100?img=3",
+    image: "https://i.pravatar.cc/100?img=5",
+  },
+  {
+    quote:
+      "Highrr has streamlined our exam process while keeping integrity at the core. The AI proctoring is top-notch!",
+    name: "Priya Nair, Academic Dean",
+    role: "FutureSkills University",
+    image: "https://i.pravatar.cc/100?img=16",
+  },
+  {
+    quote:
+      "The seamless integration of learning content and coding labs has significantly improved student retention in our programs.",
+    name: "Arjun Patel, Program Coordinator",
+    role: "CodeCraft Institute",
+    image: "https://i.pravatar.cc/100?img=5",
+  },
+  {
+    quote:
+      "With Highrr, we’ve finally been able to give our remote learners a truly engaging, interactive classroom experience.",
+    name: "David Gomez, Head of eLearning",
+    role: "Open Horizons College",
+    image: "https://i.pravatar.cc/100?img=17",
+  },
+  {
+    quote:
+      "The platform’s analytics help us track each student’s progress closely and intervene just at the right time.",
+    name: "Rahul Mehta, Administrator",
+    role: "SkillBridge Academy",
+    image: "https://i.pravatar.cc/100?img=7",
+  },
+  {
+    quote:
+      "We saw a 30% improvement in placement rates after integrating Highrr’s AI interview prep tools.",
+    name: "Emily Chen, Career Coach",
+    role: "LaunchPad Learning",
+    image: "https://i.pravatar.cc/100?img=8",
   },
 ];
 
@@ -34,8 +68,16 @@ function EducatorsSaying() {
 
   const testimonial = testimonials[index];
 
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setIndex((prev) => (prev + 1) % testimonials.length);
+  //   }, 7000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
   return (
-    <section className="bg-white py-14 px-6 lg:px-20 relative">
+    <section className="bg-white py-14 px-6 md:px-15 lg:px-24 relative">
       <h2 className="text-3xl md:text-4xl font-ibm font-semibold mb-5 text-gray-900">
         From the Highrr Community
       </h2>
@@ -59,7 +101,7 @@ function EducatorsSaying() {
               “{testimonial.quote}”
             </blockquote>
 
-            <div className="w-16 h-16 rounded-full border-4 border-purple-500 p-1">
+            <div className="w-16 h-16 rounded-full border-2 border-purple-500 p-0.5">
               <img
                 src={testimonial.image}
                 alt={testimonial.name}

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "../../assets/highrr.jpg";
 import { motion, AnimatePresence } from "framer-motion";
+import language from "../../assets/language.png";
 
 function HomeNavbarR() {
   const navigate = useNavigate();
@@ -29,17 +30,22 @@ function HomeNavbarR() {
           <span className="cursor-pointer hover:text-violet-600">
             Testimonials
           </span>
-          <span className="cursor-pointer hover:text-violet-600">Contact us</span>
+          <span className="cursor-pointer hover:text-violet-600">
+            Contact us
+          </span>
         </div>
 
         {/* Auth Buttons - Desktop */}
         <div className="hidden lg:flex space-x-4">
           <button
             onClick={() => navigate("/login/admin")}
-            className="px-4 py-2 text-sm  bg-[#9D5CFF] text-white rounded-md"
+            className="px-4 py-1 text-xs bg-[#9D5CFF] text-white rounded-md hover:bg-violet-700"
           >
-            Organization Login
+            Login
           </button>
+          <div className="border border-[#ABABAB] rounded-full p-2">
+            <img src={language} alt="language" className="w-5 h-5" />
+          </div>
           {/* <button
             onClick={() => navigate("/login/admin")}
             className="px-4 py-2 text-sm  bg-[#9D5CFF] text-white rounded-md hover:bg-violet-700"

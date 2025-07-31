@@ -15,14 +15,49 @@ const testimonials = [
       "This platform helped our teachers deliver more personalized learning. The AI-powered labs are intuitive and effective.",
     name: "Sara Lee, Director",
     role: "Bright Minds Academy",
-    image: "https://i.pravatar.cc/100?img=2",
+    image: "https://i.pravatar.cc/100?img=7",
   },
   {
     quote:
       "Students are loving the interactive assessments. It gives them a real-world feel even before they graduate.",
     name: "Michael Chan, Principal",
     role: "NextGen High School",
-    image: "https://i.pravatar.cc/100?img=3",
+    image: "https://i.pravatar.cc/100?img=12",
+  },
+  {
+    quote:
+      "As a placement coordinator, I’ve seen a noticeable increase in student confidence and clarity after using Highrr's interview simulator.",
+    name: "Rakesh Menon, Placement Officer",
+    role: "VIT Chennai",
+    image: "https://i.pravatar.cc/100?img=7",
+  },
+  {
+    quote:
+      "The seamless coding environment is perfect for live problem-solving sessions during our classes. It saves so much setup time.",
+    name: "Neha Gupta, Instructor",
+    role: "CodeRise Academy",
+    image: "https://i.pravatar.cc/100?img=5",
+  },
+  {
+    quote:
+      "I loved how easy it was to record and submit my answers. The AI feedback felt like a real mentor guiding me.",
+    name: "Aman Raj, Computer Science Student",
+    role: "KIIT University",
+    image: "https://i.pravatar.cc/100?img=8",
+  },
+  {
+    quote:
+      "The built-in analytics tools have helped us identify at-risk students and offer timely support.",
+    name: "Janet Moore, Academic Advisor",
+    role: "Riverdale College",
+    image: "https://i.pravatar.cc/100?img=17",
+  },
+  {
+    quote:
+      "Our students are completing more mock tests than ever before, and they genuinely enjoy the process!",
+    name: "Farhan Ali, HOD - CS",
+    role: "TechBridge Institute",
+    image: "https://i.pravatar.cc/100?img=8",
   },
 ];
 
@@ -35,7 +70,7 @@ function VoiceOfOurLeaners() {
   const testimonial = testimonials[index];
 
   return (
-    <section className="bg-white py-14 px-6 lg:px-20 relative">
+    <section className="bg-white py-14 px-6 md:px-20 relative">
       <h2 className="text-3xl md:text-4xl font-ibm font-semibold mb-5">
         Voices of Our Learners
       </h2>
@@ -59,7 +94,7 @@ function VoiceOfOurLeaners() {
               “{testimonial.quote}”
             </blockquote>
 
-            <div className="w-16 h-16 rounded-full border-4 border-purple-500 p-1">
+            <div className="w-16 h-16 rounded-full border-2 border-purple-500 p-0.5">
               <img
                 src={testimonial.image}
                 alt={testimonial.name}

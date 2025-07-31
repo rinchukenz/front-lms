@@ -37,7 +37,7 @@ function HomeFaqSection() {
   };
 
   return (
-    <section className="px-4 py-8 sm:px-8 md:px-16 lg:px-20 bg-white">
+    <section className="px-6 py-8 sm:px-8 md:px-20 bg-white">
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-ibm font-semibold mb-12 text-gray-900">
         Frequently Asked Questions
       </h2>

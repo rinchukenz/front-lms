@@ -56,7 +56,10 @@ function HomeNavbar() {
 
         {/* Auth Buttons - Desktop */}
         <div className="hidden lg:flex items-center space-x-3">
-          <button className="px-4 py-2 text-xs bg-violet-600 text-white rounded-md hover:bg-violet-700">
+          <button
+            onClick={() => navigate("/login/student")}
+            className="px-4 py-2 text-xs bg-[#9D5CFF] text-white rounded-md hover:bg-violet-700"
+          >
             Log In
           </button>
           <button

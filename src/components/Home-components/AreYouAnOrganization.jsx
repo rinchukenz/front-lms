@@ -1,8 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function AreYouAnOrganization() {
+
+  const navigate = useNavigate();
+
   return (
-    <section className="bg-white py-14 px-6 lg:px-20">
+    <section className="bg-white py-14 px-6 md:px-20">
       <div>
         <h1 className="text-3xl md:text-4xl font-ibm font-semibold mb-5">
           Are You an Organization
