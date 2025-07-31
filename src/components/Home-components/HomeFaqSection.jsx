@@ -3,23 +3,33 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    question: "Q1: Can we use our own domain?",
+    question: "Q1: What kind of courses are available on this platform?",
     answer:
-      "Yes, your LMS will run on your custom domain (e.g., organization.highrr.com), with your logo and colors.",
+      "We offer handpicked, industry-relevant courses created and uploaded by our own team of experts. Topics include AI, business, technology, and career development — all designed to help you become job-ready.",
   },
   {
-    question: "Q2: How long does setup take?",
+    question: "Q2: Can I upload my own courses or content?",
     answer:
       "Yes, you can fully brand your LMS with your organization’s logo, colors, and custom domain.",
   },
   {
-    question: "Q3: Do we need technical staff to manage it?",
+    question: "Q3: Is the course content the same for all users globally?",
+    answer:
+      "No technical knowledge is required. Our team manages everything from setup to support.",
+  },
+  {
+    question: "Q4: Are the courses beginner-friendly?",
+    answer:
+      "No technical knowledge is required. Our team manages everything from setup to support.",
+  },
+  {
+    question: "Q5: Will I get a certificate after completing a course?",
     answer:
       "No technical knowledge is required. Our team manages everything from setup to support.",
   },
 ];
 
-function FaqSection() {
+function HomeFaqSection() {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleFAQ = (index) => {
@@ -27,7 +37,7 @@ function FaqSection() {
   };
 
   return (
-    <section className="px-4 py-8 sm:px-8 md:px-16 lg:px-24 bg-white">
+    <section className="px-4 py-8 sm:px-8 md:px-16 lg:px-20 bg-white">
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-ibm font-semibold mb-12 text-gray-900">
         Frequently Asked Questions
       </h2>
@@ -44,7 +54,7 @@ function FaqSection() {
               onClick={() => toggleFAQ(index)}
               className="w-full text-left px-6 py-2 transition flex justify-between items-center"
             >
-              <span className="text-base font-inter text-gray-900">
+              <span className="text-base font-inter font-medium text-gray-900">
                 {faq.question}
               </span>
               <span className="text-xl text-gray-600">
@@ -73,4 +83,4 @@ function FaqSection() {
   );
 }
 
-export default FaqSection;
+export default HomeFaqSection;

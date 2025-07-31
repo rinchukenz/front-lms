@@ -1,0 +1,7 @@
+.hero {
+  background-image: url('../../assets/herobg.jpg');
+  background-size: cover;
+  background-position: center;
+  height: calc(100vh - 100px); /* Correct way to subtract */
+  width: 100%;
+}

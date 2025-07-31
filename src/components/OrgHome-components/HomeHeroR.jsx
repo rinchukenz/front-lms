@@ -3,7 +3,7 @@ import ImageCarouselSwiper from "./ImageCarouselSwiper";
 
 function HomeHeroR() {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-between px-4 md:px-12 py-12 md:py-16 lg:py-25 bg-[#ffffff] relative overflow-hidden">
+    <div className="flex flex-col lg:flex-row items-center justify-between px-4 md:px-12 lg:px-18 py-12 md:py-16 lg:py-10  bg-[#FDF7FD] relative overflow-hidden">
       
       {/* Left Section */}
       <div className="w-full lg:w-1/2 text-center lg:text-left mt-20 lg:pt-10 lg:mt-15">
