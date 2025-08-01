@@ -69,12 +69,7 @@ function EducatorsSaying() {
   const testimonial = testimonials[index];
 
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setIndex((prev) => (prev + 1) % testimonials.length);
-  //   }, 7000);
-  //   return () => clearInterval(interval);
-  // }, []);
+
 
   return (
     <section className="bg-white py-14 px-6 md:px-15 lg:px-24 relative">

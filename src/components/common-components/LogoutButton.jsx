@@ -1,5 +1,4 @@
 import React from "react";
-// import { useAuth } from "../context/AuthContext";
 import { MdLogout } from "react-icons/md";
 import { useAuth } from "../../context/AuthContext";
 

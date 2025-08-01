@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import Login from "../components/Login-Form/Login";
-//import StudentLogin from "../components/StudentLogin";
 import loginImage from "../assets/loginbg.jpg";
 import back from "../assets/backbutton.png";
 import StudentLogin from "../components/Login-Form/StudentLogin";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  // const [loginType, setLoginType] = useState("USER");
   const navigate = useNavigate();
 
   return (
@@ -61,30 +59,6 @@ function LoginPage() {
             securely.
           </p>
         </div>
-
-        {/* Toggle Button */}
-        {/* <div className="inline-flex items-center w-1/2 border border-violet-600 rounded-md overflow-hidden">
-          <button
-            onClick={() => setLoginType("ADMIN")}
-            className={`w-1/2 py-2 text-sm font-semibold cursor-pointer transition-colors duration-300 ${
-              loginType === "ADMIN"
-                ? "bg-violet-600 text-white"
-                : "bg-white text-violet-400"
-            }`}
-          >
-            ADMIN
-          </button>
-          <button
-            onClick={() => setLoginType("USER")}
-            className={`w-1/2 py-2 text-sm font-semibold cursor-pointer transition-colors duration-300 ${
-              loginType === "USER"
-                ? "bg-violet-600 text-white"
-                : "bg-white text-violet-400"
-            }`}
-          >
-            USER
-          </button>
-        </div> */}
 
         {/* ADMIN or USER form */}
         {loginType === "ADMIN" ? <Login /> : <StudentLogin />}

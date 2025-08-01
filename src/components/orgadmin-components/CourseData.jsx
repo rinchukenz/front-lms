@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-//import { courses } from "../components/Courses/Courses";
 
 function CourseData() {
   const { cId } = useParams();

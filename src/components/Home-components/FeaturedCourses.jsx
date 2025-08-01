@@ -152,7 +152,6 @@ const FeaturedCourses = () => {
       rating: "4.6",
       price: "₹999",
     },
-    // ... (repeat items if needed)
   ];
 
   return (

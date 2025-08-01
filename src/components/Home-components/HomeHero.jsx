@@ -8,7 +8,6 @@ import icon5 from "../../assets/icon5.svg";
 import icon6 from "../../assets/icon6.svg";
 import Icon from "../../pages/opening-window/Icon";
 import bgpink from "../../assets/backgroundpink.svg";
-// import "./HomeHero.css";
 import herobg from "../../assets/herobg.jpg";
 import { useNavigate } from "react-router-dom";
 

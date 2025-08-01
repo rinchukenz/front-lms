@@ -24,8 +24,6 @@ function Signup() {
   const [mobile, setMobile] = useState("");
   const [countryCode, setCountryCode] = useState("+91");
 
-  //console.log(user);
-
   const navigate = useNavigate();
 
   const handleOtpSend = async () => {
@@ -61,15 +59,6 @@ function Signup() {
       alert("Passwords do not match.");
       return;
     }
-
-    // const user = {
-    //   name,
-    //   email,
-    //   password,
-    //   phoneNumber,
-    // };
-
-    //console.log(user);
 
     try {
       const res = await axios.post("http://localhost:8080/api/users/register", {
@@ -109,28 +98,17 @@ function Signup() {
           onClick={() => navigate("/")}
         />
 
-        {/* man image */}
-        <img
-          className="absolute w-50 h-50 top-45 left-60 cursor-pointer"
-          src={loginman}
-          alt=""
-        />
-
         {/* Text */}
-        <div className="flex flex-col w-2/3 gap-3 mx-auto h-full justify-center text-center text-white">
-          <h1 className="text-white text-4xl font-sans text-left font-semibold">
-            Sign up
-          </h1>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2/3 mx-auto items-center text-white">
+          <div className="flex w-full justify-start items-baseline gap-4">
+            <h1 className="text-white text-4xl font-sans text-center font-semibold">
+              Sign In
+            </h1>
+            <img className="w-50 h-50 object-cover" src={loginman} alt="" />
+          </div>
           <p className="text-white font-semibold text-left font-sans">
-            Create your account to get started with Highrr{" "}
+            Sign in to enjoy the best managing experience
           </p>
-        </div>
-
-        {/* Dots */}
-        <div className="absolute bottom-25 left-2/5 flex gap-2">
-          <span className="w-3 h-3 rounded-full bg-purple-500"></span>
-          <span className="w-3 h-3 rounded-full bg-white/50"></span>
-          <span className="w-3 h-3 rounded-full bg-white/50"></span>
         </div>
       </div>
 
@@ -243,13 +221,6 @@ function Signup() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            {/* <CustomInput
-              label="Phone Number"
-              type="tel"
-              placeholder="Enter your mobile number"
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
-            /> */}
           </form>
 
           <span className="text-green-400">✅ mobile number verified</span>

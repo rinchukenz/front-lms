@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-// import Login from "../components/Login-Form/Login";
-//import StudentLogin from "../components/StudentLogin";
 import loginImage from "../../assets/login-leftbg.jpg";
 import loginman from "../../assets/login-man.svg";
 import back from "../../assets/backbutton.png";
-// import StudentLogin from "../components/Login-Form/StudentLogin";
 import { useNavigate } from "react-router-dom";
 import StudentLogin from "./StudentLogin";
 
 function LoginStudent() {
-  // const [loginType, setLoginType] = useState("USER");
   const navigate = useNavigate();
 
   return (
     <div className="max-h-screen min-h-screen flex flex-col lg:flex-row">
       {/* Image Container */}
       <div
-        className="hidden lg:block relative lg:w-1/2 lg:h-auto"
+        className="hidden lg:block relative lg:w-1/2"
         style={{
           backgroundImage: `url(${loginImage})`,
           backgroundSize: "cover",
@@ -32,28 +28,17 @@ function LoginStudent() {
           onClick={() => navigate("/")}
         />
 
-        {/* man image */}
-        <img
-          className="absolute w-50 h-50 top-45 left-60 cursor-pointer"
-          src={loginman}
-          alt=""
-        />
-
         {/* Text */}
-        <div className="flex flex-col w-2/3 gap-3 mx-auto h-full justify-center text-center text-white">
-          <h1 className="text-white text-4xl font-sans text-left font-semibold">
-            Sign In
-          </h1>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2/3 mx-auto text-white">
+          <div className="flex items-baseline gap-4">
+            <h1 className="text-white text-4xl font-sans text-left font-semibold">
+              Sign In
+            </h1>
+            <img className="w-50 h-50" src={loginman} alt="" />
+          </div>
           <p className="text-white font-semibold text-left font-sans">
             Sign in to enjoy the best managing experience
           </p>
-        </div>
-
-        {/* Dots */}
-        <div className="absolute bottom-25 left-2/5 flex gap-2">
-          <span className="w-3 h-3 rounded-full bg-purple-500"></span>
-          <span className="w-3 h-3 rounded-full bg-white/50"></span>
-          <span className="w-3 h-3 rounded-full bg-white/50"></span>
         </div>
       </div>
 

@@ -147,9 +147,7 @@ function Students() {
           onChange={(e) => setSearch(e.target.value)}
           className="border border-gray-300 px-4 py-2 rounded-lg w-64"
         />
-        {/* <button className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-black">
-          Filter
-        </button> */}
+        
       </div>
 
       {/* View mode toggle */}

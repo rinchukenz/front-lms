@@ -3,9 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { Bell, User, Menu } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
-// import LogOutButton from "../LogOutButton";
-// import CustomInput from "../CustomInput.jsx/CustomInput";
-// import CustomButton from "../CustomButton/CustomButton";
 import { toast } from "react-toastify";
 import axios from "axios";
 import LogOutButton from "./LogoutButton";
@@ -25,11 +22,6 @@ function Navbar() {
   const [otpSend, setOtpSend] = useState(false);
 
   const navigate = useNavigate();
-
-  // Replace this with actual user data from context or props
-  //const email = "student@example.com";
-
-  //console.log(auth);
 
   const getHeaderTitle = () => {
     if (location.pathname.includes("/student/courses")) return "Courses";
@@ -87,7 +79,6 @@ function Navbar() {
         otp,
         newPassword,
       });
-      //setOtpSend(false);
       setShowModal(false);
       toast.success("Password changed successfully");
     } catch (err) {
@@ -99,7 +90,6 @@ function Navbar() {
     navigate("/student/profile");
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -153,12 +143,6 @@ function Navbar() {
                 </button>
               )}
 
-              {/* <button
-                onClick={handleSignOut}
-                className="w-full text-left hover:bg-red-100 cursor-pointer px-3 py-2 rounded-md text-sm text-red-600 font-semibold transition"
-              >
-                🚪 Sign Out
-              </button> */}
               <LogOutButton />
             </div>
           )}

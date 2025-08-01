@@ -14,7 +14,6 @@ function HomeNavbarR() {
       <div className="h-[80px] px-4 md:px-12 lg:px-18 py-4 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex flex-col justify-center">
-          {/* <h2 className="font-semibold text-2xl text-violet-500">HIGHRR</h2> */}
           <img src={logo} alt="" className="w-45 h-12 ml-[-22px] mt-[-5px]" />
           <span className="text-xxs font-semibold text-white">
             grow higher, get hire
@@ -46,12 +45,6 @@ function HomeNavbarR() {
           <div className="border border-[#ABABAB] rounded-full p-2">
             <img src={language} alt="language" className="w-5 h-5" />
           </div>
-          {/* <button
-            onClick={() => navigate("/login/admin")}
-            className="px-4 py-2 text-sm  bg-[#9D5CFF] text-white rounded-md hover:bg-violet-700"
-          >
-            Log In
-          </button> */}
         </div>
 
         {/* Hamburger Icon - Mobile */}
@@ -98,9 +91,6 @@ function HomeNavbarR() {
               >
                 Organization Login
               </button>
-              {/* <button className="w-1/4 px-4 py-2 text-sm bg-violet-600 text-white rounded-md hover:bg-violet-700 transition-colors duration-200">
-                Log In
-              </button> */}
             </div>
           </motion.div>
         )}

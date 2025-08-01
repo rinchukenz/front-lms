@@ -15,7 +15,7 @@ function InterviewPage() {
       { sender: "AI", text: "Hello! 👋 Ready for your mock interview? Let's begin." },
       { sender: "AI", text: res.data.question },
     ]);
-  };
+  }; 
 
   const handleSend = async () => {
     if (!input.trim()) return;

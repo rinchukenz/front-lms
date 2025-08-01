@@ -3,11 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
-// import CustomInput from "../CustomInput.jsx/CustomInput";
-// import CustomButton from "../CustomButton/CustomButton";
-import google from "../../assets/google.png";
-import loginImage from "../../assets/loginbg.jpg";
-import back from "../../assets/backbutton.png";
 import CustomInput from "../common-components/CustomInput";
 import CustomButton from "../common-components/CustomButton";
 
@@ -38,11 +33,9 @@ function Login() {
         organizationName,
       } = decoded;
 
-      //console.log(token);
       console.log(decoded);
-      //console.log(role, user, name, organizationId, organizationName);
 
-      localStorage.setItem("token", token); // ✅ store token
+      localStorage.setItem("token", token); // store token
 
       setAuth({
         isLoggedIn: true,
@@ -109,25 +102,6 @@ function Login() {
           action={handleClick}
           className="cursor-pointer w-1/2 bg-violet-500 hover:bg-violet-600 text-white py-3 rounded-lg font-medium transition"
         />
-        {/* <div className="flex w-1/2 items-center gap-2 text-black text-xs mt-2">
-          <hr className="flex-grow border-gray-200" />
-          <span className="font-semibold">or login with</span>
-          <hr className="flex-grow border-gray-200" />
-        </div>
-        <CustomButton
-          icon={google}
-          text="Google"
-          className="cursor-pointer w-1/2 border rounded-lg flex items-center justify-center gap-2 py-3 hover:bg-gray-50 transition"
-        />
-        <p className="text-center text-sm text-gray-500 mt-4">
-          Don’t have an Account?{" "}
-          <span
-            onClick={() => navigate("/signup")}
-            className="text-violet-500 hover:underline cursor-pointer"
-          >
-            Sign up
-          </span>
-        </p> */}
       </div>
     </div>
   );

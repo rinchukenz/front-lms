@@ -1,21 +1,7 @@
-// components/ClassSchedule.jsx
 
 import React from "react";
 
-// const classes = [
-//   {
-//     title: "SpringBoot Class",
-//     type: "Live",
-//     time: "12:00 PM",
-//     color: "bg-gradient-to-r from-violet-500 to-pink-400"
-//   },
-//   {
-//     title: "React Class",
-//     type: "Live",
-//     time: "12:00 PM",
-//     color: "bg-gradient-to-r from-violet-500 to-pink-400"
-//   }
-// ];
+
 
 // Single class card
 const ClassCard = ({ title, type, time }) => (

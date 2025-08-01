@@ -2,20 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-//import CustomInput from "../CustomInput.jsx/CustomInput";
-//import CustomButton from "../CustomButton/CustomButton";
-//import google from "../../assets/google.png";
-// import google from "../assets/google.png";
-// import CustomInput from "./CustomInput.jsx/CustomInput";
-// import CustomButton from "./CustomButton/CustomButton";
-import google from "../../assets/google.png"
-//import { useAuth } from "../context/AuthContext";
-import loginImage from "../../assets/loginbg.jpg";
-import back from "../../assets/backbutton.png";
-import { div } from "framer-motion/client";
+import google from "../../assets/google.png";
 import { toast } from "react-toastify";
-// import CustomButton from "./common-components/CustomButton";
-// import CustomInput from "./common-components/CustomInput";
 import { useAuth } from "../../context/AuthContext";
 import CustomInput from "../common-components/CustomInput";
 import CustomButton from "../common-components/CustomButton";
@@ -65,8 +53,6 @@ function StudentLogin() {
       }
     } catch (err) {
       toast.error("Login Failed");
-      //console.error("Login failed", err);
-      //alert("Login failed");
     }
   };
 
@@ -89,7 +75,6 @@ function StudentLogin() {
         otp,
         newPassword,
       });
-      //setOtpSend(false);
       setShowModal(false);
       toast.success("Password changed successfully");
     } catch (err) {

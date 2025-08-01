@@ -14,7 +14,6 @@ import {
 import { useParams } from "react-router-dom";
 import SectionCard from "./SectionCard";
 import { useAuth } from "../../context/AuthContext";
-//import { useAuth } from "../context/AuthContext";
 
 const CourseSyllabus = () => {
   const { cId } = useParams();
@@ -110,7 +109,6 @@ const CourseSyllabus = () => {
 
   const handleDeleteSection = async (sectionId) => {
     await deleteSection(sectionId);
-    //await deleteSection(sectionId);
     fetchSections();
   };
 
@@ -176,7 +174,6 @@ const CourseSyllabus = () => {
 
   const handleDeleteContent = async (contentId) => {
     await deleteContent(contentId);
-    //await deleteContent(contentId);
     fetchContents();
   };
 

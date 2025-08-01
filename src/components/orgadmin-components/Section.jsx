@@ -21,8 +21,6 @@ function Section({ section, handledeletesection, handleTogglePublish, handleOpen
         {section.isPublished ? "Yes" : "No"}
       </p>
 
-      {/* Content
-      <Content /> */}
 
       <div className="flex items-center gap-4 mt-2">
         <button
